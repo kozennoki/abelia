@@ -65,6 +65,10 @@ export interface ArticleListProps {
   loading?: boolean;
 }
 
+export interface ArticleDetailProps {
+  article: Article;
+}
+
 // Utility types
 export type LoadingState = 'idle' | 'loading' | 'success' | 'error';
 
