@@ -8,12 +8,13 @@ export function cn(...inputs: ClassValue[]) {
 
 // Date formatting utilities
 export function formatDate(dateString: string): string {
+  // Parse the ISO date string manually to avoid timezone issues
   const date = new Date(dateString);
   
-  // Ensure consistent behavior across server and client
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
+  // Use UTC methods to ensure consistent behavior across server and client
+  const year = date.getUTCFullYear();
+  const month = date.getUTCMonth() + 1;
+  const day = date.getUTCDate();
   
   return `${year}年${month}月${day}日`;
 }
@@ -21,10 +22,10 @@ export function formatDate(dateString: string): string {
 export function formatDateShort(dateString: string): string {
   const date = new Date(dateString);
   
-  // Ensure consistent behavior across server and client
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
+  // Use UTC methods to ensure consistent behavior across server and client
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(date.getUTCDate()).padStart(2, '0');
   
   return `${year}/${month}/${day}`;
 }

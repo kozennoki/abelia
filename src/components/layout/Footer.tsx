@@ -1,3 +1,5 @@
+"use client";
+
 import { SITE_NAME } from '@/lib/constants';
 
 export default function Footer() {

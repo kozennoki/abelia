@@ -17,7 +17,6 @@ export const ARTICLE_IMAGE_PLACEHOLDER = 'data:image/svg+xml;base64,PHN2ZyB3aWR0
 // Site metadata
 export const SITE_NAME = 'Nerine Blog';
 export const SITE_DESCRIPTION = 'A modern blog powered by Nerine';
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 // Cache
 export const CACHE_REVALIDATE_SECONDS = 3600; // 1 hour
