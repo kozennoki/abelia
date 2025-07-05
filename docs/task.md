@@ -51,46 +51,55 @@ Nerine BFF APIと連携するブログシステムのフロントエンドアプ
   - [x] 静的生成設定
   - [x] **Hydrationエラー修正** - SSR/クライアント一貫性確保
 
+#### ✅ 完了済み（フェーズ2: コア機能実装 - 続き）
+- [x] **2.3 記事詳細ページ** - 完了
+  - [x] `app/articles/[id]/page.tsx`の実装（動的ルーティング）
+  - [x] `components/article/ArticleDetail.tsx`（記事詳細表示）
+  - [x] `generateStaticParams`の実装（静的生成）
+  - [x] SEO用メタデータ生成（動的タイトル・説明文）
+
+- [x] **2.4 エラー・ローディング状態** - 完了
+  - [x] `components/common/Loading.tsx`（ローディングコンポーネント）
+  - [x] `app/error.tsx`（エラーページ）
+  - [x] `app/loading.tsx`（ローディング）
+  - [x] `app/not-found.tsx`（404ページ）
+
 #### 🔄 現在の実装状況
-- **開発サーバー**: 動作確認済み（モックデータ使用）
+- **開発サーバー**: ✅ 完全動作（モックデータ使用）
 - **記事一覧ページ**: ✅ 完全動作（6つのサンプル記事表示）
-- **記事詳細ページ**: ❌ 未実装（404エラー）
+- **記事詳細ページ**: ✅ 完全動作（動的ルーティング・SEO対応）
+- **エラーハンドリング**: ✅ 完全動作（404・エラー・ローディング）
 - **カテゴリページ**: ❌ 未実装
 - **モック機能**: ✅ 完全動作（`NEXT_PUBLIC_USE_MOCK=true`）
 
 #### ⏳ 次の優先タスク
-1. **2.3 記事詳細ページ** - 高優先度
-   - [ ] `app/articles/[id]/page.tsx`の実装
-   - [ ] `components/article/ArticleDetail.tsx`
-   - [ ] `generateStaticParams`の実装
-   - [ ] SEO用メタデータ生成
+1. **2.5 カテゴリ機能** - 高優先度
+   - [ ] `app/categories/[slug]/page.tsx`の実装
+   - [ ] カテゴリ別記事一覧表示
+   - [ ] ナビゲーションにカテゴリ追加
 
-2. **2.4 エラー・ローディング状態** - 中優先度（一部完了）
-   - [x] `components/common/Loading.tsx`
-   - [ ] `app/error.tsx`（エラーページ）
-   - [ ] `app/loading.tsx`（ローディング）
-   - [ ] `app/not-found.tsx`（404ページ）
+2. **2.6 ページネーション** - 中優先度
+   - [ ] `components/common/Pagination.tsx`
+   - [ ] 記事一覧でのページネーション
+   - [ ] カテゴリページでのページネーション
 
 ## 残りのタスク
 
 ### 🔥 優先度: 高
-1. **記事詳細ページ実装**
-   - [ ] `app/articles/[id]/page.tsx`
-   - [ ] `components/article/ArticleDetail.tsx`
-   - [ ] `generateStaticParams`実装
-
-2. **エラー・404ページ**
-   - [ ] `app/error.tsx`
-   - [ ] `app/not-found.tsx`
-   - [ ] `app/loading.tsx`
+1. **カテゴリ機能実装**
+   - [ ] `app/categories/[slug]/page.tsx`
+   - [ ] カテゴリ別記事一覧表示
+   - [ ] ナビゲーションにカテゴリ追加
 
 ### 📋 優先度: 中
-3. **カテゴリ機能**
-   - [ ] `app/categories/[slug]/page.tsx`
-   - [ ] カテゴリナビゲーション
-
-4. **ページネーション**
+2. **ページネーション**
    - [ ] `components/common/Pagination.tsx`
+   - [ ] 記事一覧でのページネーション
+   - [ ] カテゴリページでのページネーション
+
+3. **ナビゲーション強化**
+   - [ ] カテゴリメニュー
+   - [ ] パンくずリスト
 
 ### 📝 優先度: 低
 5. **レスポンシブ最適化**
