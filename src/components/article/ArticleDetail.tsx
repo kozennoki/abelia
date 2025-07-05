@@ -3,7 +3,6 @@
 import Link from "next/link";
 import type { ArticleDetailProps } from "@/lib/types";
 import { formatDate } from "@/lib/utils";
-import { cn } from "@/lib/utils";
 
 export default function ArticleDetail({ article }: ArticleDetailProps) {
   return (
