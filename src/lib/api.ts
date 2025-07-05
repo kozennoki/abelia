@@ -96,17 +96,15 @@ function buildQueryString(params: Record<string, unknown>): string {
 }
 
 // Article API functions
-export async function getArticles(params: GetArticlesParams = {}): Promise<Article[]> {
+export async function getArticles(params: GetArticlesParams = {}): Promise<ArticleListResponse> {
   if (env.NEXT_PUBLIC_USE_MOCK) {
     await delay();
     const { page = 1, limit = 10 } = params;
-    const response = generateMockArticleListResponse(mockArticles, page, limit);
-    return response.articles;
+    return generateMockArticleListResponse(mockArticles, page, limit);
   }
 
   const queryString = buildQueryString(params as Record<string, unknown>);
-  const response = await apiRequest<ArticleListResponse>(`/articles${queryString}`);
-  return response.articles;
+  return await apiRequest<ArticleListResponse>(`/articles${queryString}`);
 }
 
 export async function getArticle(id: string): Promise<Article> {
@@ -158,19 +156,17 @@ export async function getCategories(): Promise<Category[]> {
   return response.categories;
 }
 
-export async function getCategoryArticles(params: GetCategoryArticlesParams): Promise<Article[]> {
+export async function getCategoryArticles(params: GetCategoryArticlesParams): Promise<ArticleListResponse> {
   if (env.NEXT_PUBLIC_USE_MOCK) {
     await delay();
     const { slug, page = 1, limit = 10 } = params;
     const categoryArticles = getMockArticlesByCategory(slug);
-    const response = generateMockArticleListResponse(categoryArticles, page, limit);
-    return response.articles;
+    return generateMockArticleListResponse(categoryArticles, page, limit);
   }
 
   const { slug, ...queryParams } = params;
   const queryString = buildQueryString(queryParams as Record<string, unknown>);
-  const response = await apiRequest<ArticleListResponse>(`/categories/${slug}/articles${queryString}`);
-  return response.articles;
+  return await apiRequest<ArticleListResponse>(`/categories/${slug}/articles${queryString}`);
 }
 
 // Health check function

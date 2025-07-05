@@ -13,8 +13,8 @@ interface ArticlePageProps {
 // Generate static params for all articles
 export async function generateStaticParams() {
   try {
-    const articles = await getArticles({ limit: 100 });
-    return articles.map((article) => ({
+    const response = await getArticles({ limit: 100 });
+    return response.articles.map((article) => ({
       id: article.ID,
     }));
   } catch (error) {

@@ -1,19 +1,25 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useParams, notFound } from 'next/navigation';
+import { useEffect, useState, Suspense } from 'react';
+import { useParams, useSearchParams, useRouter, notFound } from 'next/navigation';
 import { getCategoryArticles, getCategories } from '@/lib/api';
 import { ArticleList } from '@/components/article';
+import { Pagination } from '@/components/common';
 import { mockCategories } from '@/lib/mockData';
 import { env } from '@/lib/env';
+import { ARTICLES_PER_PAGE } from '@/lib/constants';
 import type { Article, Category } from '@/lib/types';
 
-export default function CategoryPage() {
+function CategoryPageContent() {
   const params = useParams();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const slug = params?.slug as string;
+  const currentPage = parseInt(searchParams?.get('page') || '1', 10);
   
   const [category, setCategory] = useState<Category | null>(null);
   const [articles, setArticles] = useState<Article[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -40,8 +46,13 @@ export default function CategoryPage() {
         setCategory(foundCategory);
 
         // カテゴリの記事を取得
-        const categoryArticles = await getCategoryArticles({ slug });
-        setArticles(categoryArticles);
+        const response = await getCategoryArticles({ 
+          slug, 
+          page: currentPage, 
+          limit: ARTICLES_PER_PAGE 
+        });
+        setArticles(response.articles);
+        setTotalPages(Math.ceil((response.total || 0) / ARTICLES_PER_PAGE));
       } catch (err) {
         console.error('Error fetching category articles:', err);
         setError('記事の取得に失敗しました。');
@@ -51,7 +62,20 @@ export default function CategoryPage() {
     }
 
     fetchData();
-  }, [slug]);
+  }, [slug, currentPage]);
+
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams?.toString());
+    if (page === 1) {
+      params.delete('page');
+    } else {
+      params.set('page', page.toString());
+    }
+    
+    const queryString = params.toString();
+    const newUrl = queryString ? `/categories/${slug}?${queryString}` : `/categories/${slug}`;
+    router.push(newUrl);
+  };
 
   if (loading) {
     return (
@@ -122,7 +146,14 @@ export default function CategoryPage() {
 
       {/* 記事一覧 */}
       {articles.length > 0 ? (
-        <ArticleList articles={articles} />
+        <>
+          <ArticleList articles={articles} />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        </>
       ) : (
         <div className="text-center py-12">
           <p className="text-gray-500 text-lg">
@@ -131,5 +162,36 @@ export default function CategoryPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function CategoryPage() {
+  return (
+    <Suspense fallback={
+      <div className="container mx-auto px-4 py-8">
+        <div className="mb-8">
+          <div className="h-8 bg-gray-200 rounded w-48 mb-2 animate-pulse"></div>
+          <div className="h-4 bg-gray-200 rounded w-64 animate-pulse"></div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse"
+            >
+              <div className="h-48 bg-gray-200"></div>
+              <div className="p-6">
+                <div className="h-4 bg-gray-200 rounded w-20 mb-3"></div>
+                <div className="h-6 bg-gray-200 rounded w-full mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+                <div className="h-4 bg-gray-200 rounded w-24"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    }>
+      <CategoryPageContent />
+    </Suspense>
   );
 }
