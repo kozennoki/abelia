@@ -170,7 +170,7 @@ npm run format
 // app/page.tsx - Article list
 export default async function HomePage() {
   const articles = await getArticles({ page: 1, limit: 10 });
-  
+
   return <ArticleList articles={articles} />;
 }
 
@@ -194,11 +194,11 @@ export default async function ArticlePage({ params }: { params: { id: string } }
 export async function getArticles(params: GetArticlesParams): Promise<Article[]> {
   try {
     const response = await fetch(`${API_URL}/articles?${new URLSearchParams(params)}`);
-    
+
     if (!response.ok) {
       throw new Error(`Failed to fetch articles: ${response.status}`);
     }
-    
+
     const data: ArticleListResponse = await response.json();
     return data.articles;
   } catch (error) {
@@ -272,8 +272,8 @@ export function Header() {
 ```typescript
 // Since static export disables Next.js Image optimization
 // Use standard img tags with proper attributes
-<img 
-  src={article.Image} 
+<img
+  src={article.Image}
   alt={article.Title}
   className="w-full h-48 object-cover"
   loading="lazy"
@@ -318,7 +318,7 @@ export const metadata: Metadata = {
 // app/articles/[id]/page.tsx
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const article = await getArticle(params.id);
-  
+
   return {
     title: article.Title,
     description: article.Description,
@@ -399,3 +399,47 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 - Review API response times
 
 This guide should help you understand the project structure and development patterns for building the Nerine blog frontend.
+
+## Git Commit Rules
+
+### Commit Message Format
+
+```
+<emoji> <concise summary>
+
+Detailed description (if needed)
+
+🤖 Generated with [Claude Code](https://claude.ai/code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+```
+
+### Emoji Usage
+
+- ✨ `:sparkles:` - Add new feature
+- 🐛 `:bug:` - Fix bug
+- 🎨 `:art:` - Improve UI/UX
+- ♻️ `:recycle:` - Refactor code
+- 📚 `:books:` - Add or update documentation
+- 🚨 `:rotating_light:` - Critical hotfix
+
+### Commit Example
+
+```bash
+git commit -m ":sparkles: カテゴリ機能の実装
+
+- カテゴリ別記事一覧ページを追加
+- ナビゲーションにドロップダウンメニューを実装
+- 静的サイト生成対応
+
+🤖 Generated with [Claude Code](https://claude.ai/code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>"
+```
+
+### Guidelines
+
+1. **Use Japanese for commit messages** - This project uses Japanese for commit descriptions
+2. **Emoji is required** - To clearly indicate the type of change
+3. **Keep first line under 50 characters** - For better GitHub display
+4. **Include Claude Code signature** - Always add for AI-generated code
