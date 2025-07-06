@@ -49,18 +49,19 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
   const pageNumbers = getPageNumbers();
 
   return (
-    <div className="flex items-center justify-center space-x-2 mt-8">
+    <div className="flex items-center justify-center space-x-1 sm:space-x-2 mt-8">
       {/* 前へボタン */}
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+        className={`px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors ${
           currentPage === 1
             ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
             : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:text-gray-900'
         }`}
       >
-        前へ
+        <span className="hidden sm:inline">前へ</span>
+        <span className="sm:hidden">‹</span>
       </button>
 
       {/* ページ番号 */}
@@ -69,7 +70,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
           {typeof page === 'number' ? (
             <button
               onClick={() => onPageChange(page)}
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+              className={`px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors min-w-[32px] sm:min-w-[36px] ${
                 currentPage === page
                   ? 'bg-blue-600 text-white'
                   : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:text-gray-900'
@@ -78,7 +79,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
               {page}
             </button>
           ) : (
-            <span className="px-3 py-2 text-gray-500 text-sm">
+            <span className="px-1 sm:px-3 py-2 text-gray-500 text-xs sm:text-sm">
               {page}
             </span>
           )}
@@ -89,13 +90,14 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+        className={`px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors ${
           currentPage === totalPages
             ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
             : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:text-gray-900'
         }`}
       >
-        次へ
+        <span className="hidden sm:inline">次へ</span>
+        <span className="sm:hidden">›</span>
       </button>
     </div>
   );
