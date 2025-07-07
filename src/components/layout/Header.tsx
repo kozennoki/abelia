@@ -15,7 +15,7 @@ export default function Header() {
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const categoryList = env.NEXT_PUBLIC_USE_MOCK 
+        const categoryList = env.NEXT_PUBLIC_USE_MOCK
           ? mockCategories
           : await getCategories();
         setCategories(categoryList);
@@ -37,15 +37,15 @@ export default function Header() {
               {SITE_NAME}
             </Link>
           </div>
-          
+
           <div className="hidden md:flex items-center space-x-6">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="text-gray-600 hover:text-gray-900 transition-colors"
             >
               ホーム
             </Link>
-            
+
             {/* カテゴリドロップダウン */}
             <div className="relative group">
               <button className="text-gray-600 hover:text-gray-900 transition-colors flex items-center">
@@ -54,7 +54,7 @@ export default function Header() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-              
+
               {/* ドロップダウンメニュー */}
               <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 <div className="py-1">
@@ -71,10 +71,10 @@ export default function Header() {
               </div>
             </div>
           </div>
-          
+
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <button 
+            <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900"
             >
@@ -99,15 +99,15 @@ export default function Header() {
             <div className="px-2 pt-2 pb-3 space-y-1">
               <Link
                 href="/"
-                className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+                className="block px-3 py-2 font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 ホーム
               </Link>
-              
+
               {/* Mobile category menu */}
               <div className="px-3 py-2">
-                <div className="text-gray-600 font-medium mb-2">カテゴリ</div>
+                <div className="font-medium text-gray-600 mb-2">カテゴリ</div>
                 {categories.map((category) => (
                   <Link
                     key={category.Slug}
