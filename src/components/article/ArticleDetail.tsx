@@ -12,7 +12,7 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
         <div className="mb-4">
           <Link
             href={`/categories/${article.Category.Slug}`}
-            className="inline-block px-3 py-1 text-sm font-medium text-blue-600 bg-blue-50 rounded-full hover:bg-blue-100 transition-colors"
+            className="inline-block px-3 py-1 text-sm font-medium text-primary bg-secondary/20 rounded-full hover:bg-secondary/30 transition-colors"
           >
             {article.Category.Name}
           </Link>
@@ -68,7 +68,7 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
             <span className="text-sm text-gray-500">カテゴリ:</span>
             <Link
               href={`/categories/${article.Category.Slug}`}
-              className="text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors"
+              className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
             >
               {article.Category.Name}
             </Link>

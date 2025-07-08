@@ -45,7 +45,7 @@ export default function ArticleCard({
         <div className="flex items-center gap-2 mb-2">
           <Link
             href={`/categories/${article.Category.Slug}`}
-            className="inline-block px-2 py-1 text-xs font-medium text-blue-600 bg-blue-50 rounded"
+            className="inline-block px-2 py-1 text-xs font-medium text-primary bg-secondary/20 rounded"
           >
             {article.Category.Name}
           </Link>
@@ -57,7 +57,7 @@ export default function ArticleCard({
         <Link href={buildArticleUrl(article.ID)}>
           <h2
             className={cn(
-              "font-bold text-gray-900 hover:text-blue-600 transition-colors line-clamp-2",
+              "font-bold text-gray-900 hover:text-primary transition-colors line-clamp-2",
               isCompact ? "text-sm mb-1" : "text-lg mb-2"
             )}
           >
@@ -74,7 +74,7 @@ export default function ArticleCard({
         <Link
           href={buildArticleUrl(article.ID)}
           className={cn(
-            "inline-flex items-center font-medium text-blue-600 hover:text-blue-500",
+            "inline-flex items-center font-medium text-primary hover:text-primary/80",
             isCompact ? "text-xs" : "text-sm"
           )}
         >

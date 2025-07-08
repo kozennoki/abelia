@@ -97,7 +97,7 @@ function HomePageContent() {
           </p>
           <button
             onClick={() => window.location.reload()}
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+            className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors"
           >
             再読み込み
           </button>

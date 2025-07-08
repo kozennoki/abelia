@@ -72,7 +72,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
               onClick={() => onPageChange(page)}
               className={`px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors min-w-[32px] sm:min-w-[36px] ${
                 currentPage === page
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-primary text-white'
                   : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:text-gray-900'
               }`}
             >
