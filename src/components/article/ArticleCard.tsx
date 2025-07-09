@@ -18,34 +18,44 @@ export default function ArticleCard({
   return (
     <article
       className={cn(
-        "bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow",
+        "bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow relative group cursor-pointer",
         isCompact ? "flex" : "block"
       )}
     >
-      <Link href={buildArticleUrl(article.ID)}>
-        <div
-          className={cn(
-            "relative",
-            isCompact ? "w-32 h-24 flex-shrink-0" : "w-full h-48"
-          )}
-        >
-          <img
-            src={article.Image || ARTICLE_IMAGE_PLACEHOLDER}
-            alt={article.Title}
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.src = ARTICLE_IMAGE_PLACEHOLDER;
-            }}
-          />
-        </div>
+      {/* 記事全体のリンク */}
+      <Link 
+        href={buildArticleUrl(article.ID)}
+        className="absolute inset-0 z-10"
+        aria-label={`記事「${article.Title}」を読む`}
+      >
+        <span className="sr-only">記事「{article.Title}」を読む</span>
       </Link>
 
+      {/* 記事画像 */}
+      <div
+        className={cn(
+          "relative",
+          isCompact ? "w-32 h-24 flex-shrink-0" : "w-full h-48"
+        )}
+      >
+        <img
+          src={article.Image || ARTICLE_IMAGE_PLACEHOLDER}
+          alt={article.Title}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src = ARTICLE_IMAGE_PLACEHOLDER;
+          }}
+        />
+      </div>
+
+      {/* 記事内容 */}
       <div className={cn("p-4", isCompact ? "flex-1" : "")}>
         <div className="flex items-center gap-2 mb-2">
           <Link
             href={`/categories/${article.Category.Slug}`}
-            className="inline-block px-2 py-1 text-xs font-medium text-primary bg-secondary/20 rounded"
+            className="inline-block px-2 py-1 text-xs font-medium text-primary bg-secondary/20 rounded hover:bg-secondary/30 transition-colors relative z-20"
+            onClick={(e) => e.stopPropagation()}
           >
             {article.Category.Name}
           </Link>
@@ -54,16 +64,14 @@ export default function ArticleCard({
           </time>
         </div>
 
-        <Link href={buildArticleUrl(article.ID)}>
-          <h2
-            className={cn(
-              "font-bold text-gray-900 hover:text-primary transition-colors line-clamp-2",
-              isCompact ? "text-sm mb-1" : "text-lg mb-2"
-            )}
-          >
-            {article.Title}
-          </h2>
-        </Link>
+        <h2
+          className={cn(
+            "font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-2",
+            isCompact ? "text-sm mb-1" : "text-lg mb-2"
+          )}
+        >
+          {article.Title}
+        </h2>
 
         {!isCompact && (
           <p className="text-sm text-gray-600 line-clamp-3 mb-2">
@@ -71,28 +79,6 @@ export default function ArticleCard({
           </p>
         )}
 
-        <Link
-          href={buildArticleUrl(article.ID)}
-          className={cn(
-            "inline-flex items-center font-medium text-primary hover:text-primary/80",
-            isCompact ? "text-xs" : "text-sm"
-          )}
-        >
-          続きを読む
-          <svg
-            className="ml-1 w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </Link>
       </div>
     </article>
   );
