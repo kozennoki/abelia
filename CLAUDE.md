@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is the frontend application for the Nerine blog system, built with Next.js 14 and designed to work with the Nerine BFF (Backend for Frontend) API. The project follows a static-first approach with gradual enhancement capabilities.
+Abelia is the frontend application for the Nerine blog system, built with Next.js 14 and designed to work with the Nerine BFF (Backend for Frontend) API. The project follows a static-first approach with gradual enhancement capabilities.
 
 ## Architecture
 
