@@ -25,6 +25,9 @@
     }
   },
   "forwardPorts": [3000],
+  "runArgs": [
+    "--name=abelia",
+    "--network=dev-kozennoki"
+  ],
   "postCreateCommand": "echo 'Dev Container Ready! Hello, Abelia!!'"
 }
-
