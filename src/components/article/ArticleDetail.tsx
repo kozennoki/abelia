@@ -12,7 +12,7 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
         <div className="mb-4">
           <Link
             href={`/categories/${article.Category.Slug}`}
-            className="inline-block px-3 py-1 text-sm font-medium text-primary bg-secondary/20 rounded-full hover:bg-secondary/30 transition-colors"
+            className="inline-block px-3 py-1 text-sm font-medium text-primary bg-secondary/20 rounded hover:bg-secondary/30 transition-colors"
           >
             {article.Category.Name}
           </Link>
