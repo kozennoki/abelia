@@ -144,6 +144,9 @@ module.exports = nextConfig
 # Install dependencies
 npm install
 
+# Generate TypeScript types from OpenAPI schema
+npm run generate:types
+
 # Run development server
 npm run dev
 
@@ -163,21 +166,46 @@ npm run lint
 npm run format
 ```
 
+## Schema-Driven Development
+
+### OpenAPI Type Generation
+This project uses OpenAPI schemas to generate TypeScript types automatically:
+
+```bash
+# Generate types from OpenAPI schema
+npm run generate:types
+
+# The generated types are placed in src/lib/openapi/
+```
+
+### Type Usage
+```typescript
+// Import OpenAPI-generated types
+import type { Article, ArticlesResponse, ErrorResponse } from '@/lib/types';
+
+// All types are now schema-driven and consistent with the BFF API
+```
+
+### Schema Structure
+- **Schema source**: `/schema/openapi.yaml` (submodule)
+- **Generated types**: `/src/lib/openapi/schema.ts`
+- **Type helpers**: `/src/lib/openapi/index.ts`
+- **Application types**: `/src/lib/types.ts` (re-exports OpenAPI types)
+
 ## Data Fetching Patterns
 
 ### Static Generation (Recommended)
 ```typescript
 // app/page.tsx - Article list
 export default async function HomePage() {
-  const articles = await getArticles({ page: 1, limit: 10 });
-
-  return <ArticleList articles={articles} />;
+  const response = await getArticles({ page: 1, limit: 10 });
+  return <ArticleList articles={response.articles} />;
 }
 
 // app/articles/[id]/page.tsx - Article detail
 export async function generateStaticParams() {
-  const articles = await getArticles({ limit: 100 });
-  return articles.map((article) => ({
+  const response = await getArticles({ limit: 100 });
+  return response.articles.map((article: Article) => ({
     id: article.ID,
   }));
 }
@@ -188,23 +216,40 @@ export default async function ArticlePage({ params }: { params: { id: string } }
 }
 ```
 
-### Error Handling
+### Error Handling (OpenAPI Schema-Driven)
 ```typescript
 // lib/api.ts
-export async function getArticles(params: GetArticlesParams): Promise<Article[]> {
+export async function getArticles(params: GetArticlesParams = {}): Promise<ArticlesResponse> {
   try {
-    const response = await fetch(`${API_URL}/articles?${new URLSearchParams(params)}`);
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch articles: ${response.status}`);
-    }
-
-    const data: ArticleListResponse = await response.json();
-    return data.articles;
+    const response = await apiRequest<ArticlesResponse>(`/api/v1/articles${queryString}`);
+    return response;
   } catch (error) {
-    console.error('Error fetching articles:', error);
+    if (error instanceof ApiErrorClass) {
+      // Error follows OpenAPI ErrorResponse schema
+      console.error('API Error:', error.toErrorResponse());
+    }
     throw error;
   }
+}
+```
+
+### API Response Structure (OpenAPI Schema)
+```typescript
+// ArticlesResponse follows OpenAPI schema
+{
+  articles: Article[];
+  pagination?: {
+    total?: number;
+    page?: number;
+    limit?: number;
+    totalPages?: number;
+  };
+}
+
+// ErrorResponse follows OpenAPI schema
+{
+  error: string;
+  detail?: string;
 }
 ```
 
@@ -359,10 +404,11 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 5. Build and verify static export works
 
 ### Before Deployment
-1. Run `npm run build` to ensure static export works
-2. Test the generated static files
-3. Verify all API endpoints work correctly
-4. Check responsive design on multiple screen sizes
+1. Run `npm run generate:types` to ensure types are up to date
+2. Run `npm run build` to ensure static export works
+3. Test the generated static files
+4. Verify all API endpoints work correctly
+5. Check responsive design on multiple screen sizes
 
 ## Common Development Tasks
 
@@ -379,17 +425,20 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 4. Export from index file if needed
 
 ### API Integration
-1. Add API function to `lib/api.ts`
-2. Define TypeScript types in `lib/types.ts`
-3. Handle loading and error states
-4. Implement proper error boundaries
+1. Update OpenAPI schema in `/schema/openapi.yaml` if needed
+2. Run `npm run generate:types` to update TypeScript types
+3. Add API function to `lib/api.ts` using generated types
+4. Handle loading and error states with OpenAPI error schema
+5. Implement proper error boundaries
 
 ## Troubleshooting
 
 ### Common Issues
+- **Type generation failures**: Check OpenAPI schema validity in `/schema/openapi.yaml`
 - **Static export failures**: Check for dynamic imports or server-side code
 - **API connection issues**: Verify environment variables and BFF API status
-- **Build errors**: Check TypeScript types and import paths
+- **Build errors**: Run `npm run generate:types` and check TypeScript types
+- **Type mismatches**: Ensure OpenAPI schema is up to date with BFF API
 - **Styling issues**: Verify Tailwind CSS classes and responsive design
 
 ### Performance Issues
