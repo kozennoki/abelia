@@ -14,26 +14,41 @@ import type {
   Category,
   ArticleListResponse,
   CategoryListResponse,
+  ErrorResponse,
+  HealthResponse,
   GetArticlesParams,
   GetCategoryArticlesParams,
   GetPopularArticlesParams,
   GetLatestArticlesParams,
+  GetZennArticlesParams,
 } from './types';
 
 // HTTP Client configuration
 const API_BASE_URL = env.NEXT_PUBLIC_API_URL;
 const API_KEY = env.NEXT_PUBLIC_API_KEY;
 
-// Custom error class for API errors
+// Custom error class for API errors (OpenAPI schema driven)
 export class ApiErrorClass extends Error {
+  error: string;
+  detail?: string;
   status?: number;
   code?: string;
 
-  constructor(message: string, status?: number, code?: string) {
+  constructor(message: string, status?: number, code?: string, detail?: string) {
     super(message);
     this.name = 'ApiError';
+    this.error = message;
+    this.detail = detail;
     this.status = status;
     this.code = code;
+  }
+
+  // Convert to OpenAPI ErrorResponse format
+  toErrorResponse(): ErrorResponse {
+    return {
+      error: this.error,
+      detail: this.detail,
+    };
   }
 }
 
@@ -104,7 +119,7 @@ export async function getArticles(params: GetArticlesParams = {}): Promise<Artic
   }
 
   const queryString = buildQueryString(params as Record<string, unknown>);
-  return await apiRequest<ArticleListResponse>(`/articles${queryString}`);
+  return await apiRequest<ArticleListResponse>(`/api/v1/articles${queryString}`);
 }
 
 export async function getArticle(id: string): Promise<Article> {
@@ -112,12 +127,13 @@ export async function getArticle(id: string): Promise<Article> {
     await delay();
     const article = getMockArticleById(id);
     if (!article) {
-      throw new ApiErrorClass(`Article with ID ${id} not found`, 404, 'NOT_FOUND');
+      throw new ApiErrorClass(`Article with ID ${id} not found`, 404, 'NOT_FOUND', `Article with ID '${id}' does not exist`);
     }
     return article;
   }
 
-  return await apiRequest<Article>(`/articles/${id}`);
+  const response = await apiRequest<{ article: Article }>(`/api/v1/articles/${id}`);
+  return response.article;
 }
 
 export async function getPopularArticles(params: GetPopularArticlesParams = {}): Promise<Article[]> {
@@ -128,7 +144,7 @@ export async function getPopularArticles(params: GetPopularArticlesParams = {}):
   }
 
   const queryString = buildQueryString(params as Record<string, unknown>);
-  const response = await apiRequest<ArticleListResponse>(`/articles/popular${queryString}`);
+  const response = await apiRequest<ArticleListResponse>(`/api/v1/articles/popular${queryString}`);
   return response.articles;
 }
 
@@ -140,7 +156,7 @@ export async function getLatestArticles(params: GetLatestArticlesParams = {}): P
   }
 
   const queryString = buildQueryString(params as Record<string, unknown>);
-  const response = await apiRequest<ArticleListResponse>(`/articles/latest${queryString}`);
+  const response = await apiRequest<ArticleListResponse>(`/api/v1/articles/latest${queryString}`);
   return response.articles;
 }
 
@@ -152,7 +168,7 @@ export async function getCategories(): Promise<Category[]> {
     return response.categories;
   }
 
-  const response = await apiRequest<CategoryListResponse>('/categories');
+  const response = await apiRequest<CategoryListResponse>('/api/v1/categories');
   return response.categories;
 }
 
@@ -166,20 +182,38 @@ export async function getCategoryArticles(params: GetCategoryArticlesParams): Pr
 
   const { slug, ...queryParams } = params;
   const queryString = buildQueryString(queryParams as Record<string, unknown>);
-  return await apiRequest<ArticleListResponse>(`/categories/${slug}/articles${queryString}`);
+  return await apiRequest<ArticleListResponse>(`/api/v1/categories/${slug}/articles${queryString}`);
 }
 
-// Health check function
-export async function healthCheck(): Promise<boolean> {
+// Health check function (OpenAPI schema driven)
+export async function healthCheck(): Promise<HealthResponse> {
   if (env.NEXT_PUBLIC_USE_MOCK) {
     await delay(200);
-    return true;
+    return { status: 'ok' };
   }
 
+  return await apiRequest<HealthResponse>('/health');
+}
+
+// Convenience function for backward compatibility
+export async function healthCheckBoolean(): Promise<boolean> {
   try {
-    await apiRequest('/health');
-    return true;
+    const response = await healthCheck();
+    return response.status === 'ok';
   } catch {
     return false;
   }
+}
+
+// Zenn articles API function (new from OpenAPI schema)
+export async function getZennArticles(params: GetZennArticlesParams = {}): Promise<Article[]> {
+  if (env.NEXT_PUBLIC_USE_MOCK) {
+    await delay();
+    // Return empty array for mock since we don't have mock Zenn data
+    return [];
+  }
+
+  const queryString = buildQueryString(params as Record<string, unknown>);
+  const response = await apiRequest<ArticleListResponse>(`/api/v1/zenn/articles${queryString}`);
+  return response.articles;
 }
