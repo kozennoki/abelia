@@ -52,7 +52,7 @@ function CategoryPageContent() {
           limit: ARTICLES_PER_PAGE 
         });
         setArticles(response.articles);
-        setTotalPages(Math.ceil((response.total || 0) / ARTICLES_PER_PAGE));
+        setTotalPages(Math.ceil((response.pagination?.total || 0) / ARTICLES_PER_PAGE));
       } catch (err) {
         console.error('Error fetching category articles:', err);
         setError('記事の取得に失敗しました。');

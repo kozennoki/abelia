@@ -182,9 +182,12 @@ export function generateMockArticleListResponse(
 
   return {
     articles: paginatedArticles,
-    total: articles.length,
-    page,
-    limit,
+    pagination: {
+      total: articles.length,
+      page,
+      limit,
+      totalPages: Math.ceil(articles.length / limit),
+    },
   };
 }
 
