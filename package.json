@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run generate:types && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate:types": "openapi-typescript schema/openapi.yaml -o src/lib/openapi/schema.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -21,6 +22,7 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.30",
+    "openapi-typescript": "^7.8.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
