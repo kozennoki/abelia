@@ -1,52 +1,43 @@
-// Core data types for Nerine blog system
+// Core data types for Nerine blog system - OpenAPI schema driven
+import type {
+  Article as OpenAPIArticle,
+  Category as OpenAPICategory,
+  Pagination as OpenAPIPagination,
+  ArticlesResponse as OpenAPIArticlesResponse,
+  CategoriesResponse as OpenAPICategoriesResponse,
+  ErrorResponse as OpenAPIErrorResponse,
+  HealthResponse as OpenAPIHealthResponse
+} from './openapi';
 
-export interface Category {
-  Slug: string;
-  Name: string;
-}
+// Re-export OpenAPI types as core types
+export type Category = OpenAPICategory;
+export type Article = OpenAPIArticle;
+export type Pagination = OpenAPIPagination;
 
-export interface Article {
-  ID: string;
-  Title: string;
-  Image: string;
-  Category: Category;
-  Description: string;
-  Body: string;
-  CreatedAt: string;
-  UpdatedAt: string;
-}
+// API Response types (OpenAPI schema driven)
+export type ArticleListResponse = OpenAPIArticlesResponse;
+export type CategoryListResponse = OpenAPICategoriesResponse;
+export type ErrorResponse = OpenAPIErrorResponse;
+export type HealthResponse = OpenAPIHealthResponse;
 
-// API Response types
-export interface ArticleListResponse {
-  articles: Article[];
-  total?: number;
-  page?: number;
-  limit?: number;
-}
+// API Request parameter types (OpenAPI schema driven)
+import type {
+  GetArticlesParams as OpenAPIGetArticlesParams,
+  GetPopularArticlesParams as OpenAPIGetPopularArticlesParams,
+  GetLatestArticlesParams as OpenAPIGetLatestArticlesParams,
+  GetArticlesByCategoryParams as OpenAPIGetArticlesByCategoryParams,
+  GetZennArticlesParams as OpenAPIGetZennArticlesParams
+} from './openapi';
 
-export interface CategoryListResponse {
-  categories: Category[];
-}
+export type GetArticlesParams = OpenAPIGetArticlesParams;
+export type GetPopularArticlesParams = OpenAPIGetPopularArticlesParams;
+export type GetLatestArticlesParams = OpenAPIGetLatestArticlesParams;
+export type GetZennArticlesParams = OpenAPIGetZennArticlesParams;
 
-// API Request parameter types
-export interface GetArticlesParams {
-  page?: number;
-  limit?: number;
-}
-
-export interface GetCategoryArticlesParams {
+// Custom type for category articles params (combines path and query params)
+export type GetCategoryArticlesParams = {
   slug: string;
-  page?: number;
-  limit?: number;
-}
-
-export interface GetPopularArticlesParams {
-  limit?: number;
-}
-
-export interface GetLatestArticlesParams {
-  limit?: number;
-}
+} & OpenAPIGetArticlesByCategoryParams['query'];
 
 // UI Component props types
 export interface PaginationProps {
@@ -72,8 +63,5 @@ export interface ArticleDetailProps {
 // Utility types
 export type LoadingState = 'idle' | 'loading' | 'success' | 'error';
 
-export interface ApiError {
-  message: string;
-  status?: number;
-  code?: string;
-}
+// ApiError is now based on OpenAPI ErrorResponse
+export type ApiError = ErrorResponse;
