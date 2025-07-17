@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import type { ArticleCardProps } from "@/lib/types";
-import { formatDate, truncateText, buildArticleUrl } from "@/lib/utils";
+import { formatDate, truncateText, buildArticleUrl, isEmoji, extractEmoji } from "@/lib/utils";
 import {
   ARTICLE_DESCRIPTION_MAX_LENGTH,
   ARTICLE_IMAGE_PLACEHOLDER,
@@ -14,6 +14,8 @@ export default function ArticleCard({
   variant = "default",
 }: ArticleCardProps) {
   const isCompact = variant === "compact";
+  const isZennArticle = isEmoji(article.Image);
+  const emoji = isZennArticle ? extractEmoji(article.Image) : '';
 
   return (
     <article
@@ -31,23 +33,25 @@ export default function ArticleCard({
         <span className="sr-only">記事「{article.Title}」を読む</span>
       </Link>
 
-      {/* 記事画像 */}
-      <div
-        className={cn(
-          "relative",
-          isCompact ? "w-32 h-24 flex-shrink-0" : "w-full h-48"
-        )}
-      >
-        <img
-          src={article.Image || ARTICLE_IMAGE_PLACEHOLDER}
-          alt={article.Title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.src = ARTICLE_IMAGE_PLACEHOLDER;
-          }}
-        />
-      </div>
+      {/* 記事画像 - Zenn記事の場合は非表示 */}
+      {!isZennArticle && (
+        <div
+          className={cn(
+            "relative",
+            isCompact ? "w-32 h-24 flex-shrink-0" : "w-full h-48"
+          )}
+        >
+          <img
+            src={article.Image || ARTICLE_IMAGE_PLACEHOLDER}
+            alt={article.Title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.src = ARTICLE_IMAGE_PLACEHOLDER;
+            }}
+          />
+        </div>
+      )}
 
       {/* 記事内容 */}
       <div className={cn("p-4", isCompact ? "flex-1" : "")}>
@@ -67,10 +71,16 @@ export default function ArticleCard({
         <h2
           className={cn(
             "font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-2",
-            isCompact ? "text-sm mb-1" : "text-lg mb-2"
+            isCompact ? "text-sm mb-1" : "text-lg mb-2",
+            isZennArticle ? "flex items-center gap-2" : ""
           )}
         >
-          {article.Title}
+          {isZennArticle && emoji && (
+            <span className="text-xl flex-shrink-0" aria-hidden="true">
+              {emoji}
+            </span>
+          )}
+          <span className="flex-1">{article.Title}</span>
         </h2>
 
         {!isCompact && (

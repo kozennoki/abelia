@@ -2,7 +2,7 @@
 
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { getArticles } from '@/lib/api';
+import { getArticles, getZennArticles } from '@/lib/api';
 import { ArticleList } from '@/components/article';
 import { Pagination } from '@/components/common';
 import { ARTICLES_PER_PAGE } from '@/lib/constants';
@@ -12,26 +12,30 @@ function HomePageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const currentPage = parseInt(searchParams?.get('page') || '1', 10);
-  
+
   const [articles, setArticles] = useState<Article[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Zenn記事の状態
+  const [zennArticles, setZennArticles] = useState<Article[]>([]);
+  const [zennLoading, setZennLoading] = useState(true);
 
   useEffect(() => {
     async function fetchArticles() {
       try {
         setLoading(true);
         setError(null);
-        
-        const response = await getArticles({ 
-          page: currentPage, 
-          limit: ARTICLES_PER_PAGE 
+
+        const response = await getArticles({
+          page: currentPage,
+          limit: ARTICLES_PER_PAGE
         });
-        
+
         setArticles(response.articles);
         setTotalPages(Math.ceil((response.pagination?.total || 0) / ARTICLES_PER_PAGE));
-        
+
       } catch (err) {
         console.error('Failed to fetch articles:', err);
         setError('記事の取得に失敗しました。');
@@ -44,6 +48,24 @@ function HomePageContent() {
     fetchArticles();
   }, [currentPage]);
 
+  useEffect(() => {
+    async function fetchZennArticles() {
+      // Zenn記事の取得
+      try {
+        setZennLoading(true);
+        const zenn = await getZennArticles({ limit: 5 });
+        setZennArticles(zenn);
+      } catch (err) {
+        console.error('Failed to fetch Zenn articles:', err);
+        setZennArticles([]);
+      } finally {
+        setZennLoading(false);
+      }
+    }
+
+    fetchZennArticles();
+  }, []);
+
   const handlePageChange = (page: number) => {
     const params = new URLSearchParams(searchParams?.toString());
     if (page === 1) {
@@ -51,7 +73,7 @@ function HomePageContent() {
     } else {
       params.set('page', page.toString());
     }
-    
+
     const queryString = params.toString();
     const newUrl = queryString ? `/?${queryString}` : '/';
     router.push(newUrl);
@@ -114,12 +136,28 @@ function HomePageContent() {
       </div>
 
       <ArticleList articles={articles} />
-      
+
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={handlePageChange}
       />
+
+      {/* Zenn記事セクション */}
+      <div className="mt-16 border-t border-gray-200 pt-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Zenn記事</h2>
+        {zennLoading && (
+          <div className="flex justify-center items-center py-4">
+            <div className="text-gray-500">Zenn記事を読み込み中...</div>
+          </div>
+        )}
+        {!zennLoading && zennArticles.length > 0 && (
+          <ArticleList articles={zennArticles} />
+        )}
+        {!zennLoading && zennArticles.length === 0 && (
+          <p className="text-gray-500 py-4">Zenn記事がありません。</p>
+        )}
+      </div>
     </div>
   );
 }

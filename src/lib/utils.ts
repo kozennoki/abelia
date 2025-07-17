@@ -119,3 +119,29 @@ export function generatePageNumbers(currentPage: number, totalPages: number, max
 
   return pages;
 }
+
+// Emoji detection utilities for Zenn articles
+export function isEmoji(text: string): boolean {
+  if (!text || text.length === 0) return false;
+  
+  // Check if it's a URL (starts with http/https) - if so, it's not an emoji
+  if (text.startsWith('http://') || text.startsWith('https://')) {
+    return false;
+  }
+  
+  // Simple check: if it's short text (not a URL) and contains non-ASCII characters
+  // This is a pragmatic approach for Zenn articles where emoji are used instead of URLs
+  const hasNonAscii = /[^\x00-\x7F]/.test(text);
+  const isShort = text.length <= 10;
+  
+  return hasNonAscii && isShort;
+}
+
+export function extractEmoji(imageField: string): string {
+  if (!imageField || !isEmoji(imageField)) {
+    return '';
+  }
+  
+  // Return the emoji as is since it's already a text emoji
+  return imageField.trim();
+}
