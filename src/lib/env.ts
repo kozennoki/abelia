@@ -1,6 +1,6 @@
 // Environment variables configuration
 export const env = {
-  NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api/v1',
+  NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080',
   NEXT_PUBLIC_API_KEY: process.env.NEXT_PUBLIC_API_KEY || '',
   NEXT_PUBLIC_USE_MOCK: process.env.NEXT_PUBLIC_USE_MOCK === 'true',
 } as const;
@@ -10,7 +10,7 @@ export function validateEnv() {
   if (!env.NEXT_PUBLIC_API_URL) {
     throw new Error('NEXT_PUBLIC_API_URL is required');
   }
-  
+
   if (!env.NEXT_PUBLIC_API_KEY) {
     console.warn('NEXT_PUBLIC_API_KEY is not set. API requests may fail.');
   }
