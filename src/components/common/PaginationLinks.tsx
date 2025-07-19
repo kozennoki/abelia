@@ -3,9 +3,10 @@ import Link from 'next/link';
 interface PaginationLinksProps {
   currentPage: number;
   totalPages: number;
+  baseUrl?: string;
 }
 
-export default function PaginationLinks({ currentPage, totalPages }: PaginationLinksProps) {
+export default function PaginationLinks({ currentPage, totalPages, baseUrl = "/articles" }: PaginationLinksProps) {
   if (totalPages <= 1) {
     return null;
   }
@@ -51,9 +52,9 @@ export default function PaginationLinks({ currentPage, totalPages }: PaginationL
 
   const getPageUrl = (pageNum: number) => {
     if (pageNum === 1) {
-      return '/';
+      return baseUrl;
     }
-    return `/page/${pageNum}`;
+    return `${baseUrl}/page/${pageNum}`;
   };
 
   const pageNumbers = getPageNumbers();
