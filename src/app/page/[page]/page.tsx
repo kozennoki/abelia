@@ -99,7 +99,6 @@ export default async function PagedArticlesPage({ params }: PageProps) {
       <PaginationLinks
         currentPage={pageNumber}
         totalPages={totalPages}
-        basePath="/page"
       />
     </div>
   );

@@ -3,10 +3,9 @@ import Link from 'next/link';
 interface PaginationLinksProps {
   currentPage: number;
   totalPages: number;
-  basePath: string; // "/" for home, "/page" for other pages
 }
 
-export default function PaginationLinks({ currentPage, totalPages, basePath }: PaginationLinksProps) {
+export default function PaginationLinks({ currentPage, totalPages }: PaginationLinksProps) {
   if (totalPages <= 1) {
     return null;
   }
@@ -54,7 +53,7 @@ export default function PaginationLinks({ currentPage, totalPages, basePath }: P
     if (pageNum === 1) {
       return '/';
     }
-    return `${basePath}/${pageNum}`;
+    return `/page/${pageNum}`;
   };
 
   const pageNumbers = getPageNumbers();

@@ -59,7 +59,6 @@ export default async function HomePage() {
         <PaginationLinks
           currentPage={1}
           totalPages={totalPages}
-          basePath="/"
         />
       )}
 
