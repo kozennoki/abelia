@@ -1,7 +1,9 @@
 // Application constants
 
 // Pagination
-export const ARTICLES_PER_PAGE = 6;
+export const ARTICLES_PER_PAGE = 12; // 記事一覧ページ用
+export const HOME_ARTICLES_LIMIT = 6; // ルートページの通常記事件数
+export const ZENN_ARTICLES_LIMIT = 3; // ルートページのZenn記事件数
 export const POPULAR_ARTICLES_LIMIT = 5;
 export const LATEST_ARTICLES_LIMIT = 5;
 export const MAX_VISIBLE_PAGES = 5;
