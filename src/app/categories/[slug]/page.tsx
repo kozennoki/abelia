@@ -1,110 +1,85 @@
-'use client';
-
-import { useEffect, useState, Suspense } from 'react';
-import { useParams, useSearchParams, useRouter, notFound } from 'next/navigation';
 import { getCategoryArticles, getCategories } from '@/lib/api';
 import { ArticleList } from '@/components/article';
-import { Pagination } from '@/components/common';
 import { mockCategories } from '@/lib/mockData';
 import { env } from '@/lib/env';
-import { ARTICLES_PER_PAGE } from '@/lib/constants';
 import type { Article, Category } from '@/lib/types';
+import { notFound } from 'next/navigation';
 
-function CategoryPageContent() {
-  const params = useParams();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const slug = params?.slug as string;
-  const currentPage = parseInt(searchParams?.get('page') || '1', 10);
-  
-  const [category, setCategory] = useState<Category | null>(null);
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [totalPages, setTotalPages] = useState(1);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+// 静的エクスポート用設定
+export const dynamic = 'force-static';
 
-  useEffect(() => {
-    async function fetchData() {
-      if (!slug) return;
-      
-      try {
-        setLoading(true);
-        setError(null);
-
-        // カテゴリの存在確認
-        const categories = env.NEXT_PUBLIC_USE_MOCK 
-          ? mockCategories
-          : await getCategories();
-        
-        const foundCategory = categories.find(c => c.Slug === slug);
-        
-        if (!foundCategory) {
-          notFound();
-          return;
-        }
-
-        setCategory(foundCategory);
-
-        // カテゴリの記事を取得
-        const response = await getCategoryArticles({ 
-          slug, 
-          page: currentPage, 
-          limit: ARTICLES_PER_PAGE 
-        });
-        setArticles(response.articles);
-        setTotalPages(Math.ceil((response.pagination?.total || 0) / ARTICLES_PER_PAGE));
-      } catch (err) {
-        console.error('Error fetching category articles:', err);
-        setError('記事の取得に失敗しました。');
-      } finally {
-        setLoading(false);
-      }
+// generateStaticParams関数を追加（静的エクスポート用）
+export async function generateStaticParams() {
+  try {
+    // API接続エラーの場合はモックデータを使用
+    let categories;
+    try {
+      categories = env.NEXT_PUBLIC_USE_MOCK
+        ? mockCategories
+        : await getCategories();
+    } catch {
+      console.log('API not available, using mock data for build');
+      categories = mockCategories;
     }
 
-    fetchData();
-  }, [slug, currentPage]);
+    return categories.map((category) => ({
+      slug: category.Slug,
+    }));
+  } catch (error) {
+    console.error('Error generating static params for categories:', error);
+    // エラーの場合は空配列を返す
+    return [];
+  }
+}
 
-  const handlePageChange = (page: number) => {
-    const params = new URLSearchParams(searchParams?.toString());
-    if (page === 1) {
-      params.delete('page');
-    } else {
-      params.set('page', page.toString());
+// サーバーサイドで実行される関数
+export default async function CategoryPage({
+  params
+}: {
+  params: { slug: string };
+}) {
+  const { slug } = params;
+
+  let category: Category | null = null;
+  let articles: Article[] = [];
+  let error: string | null = null;
+
+  try {
+    // カテゴリの存在確認
+    let categories;
+    try {
+      categories = env.NEXT_PUBLIC_USE_MOCK
+        ? mockCategories
+        : await getCategories();
+    } catch {
+      console.log('API not available, using mock data');
+      categories = mockCategories;
     }
-    
-    const queryString = params.toString();
-    const newUrl = queryString ? `/categories/${slug}?${queryString}` : `/categories/${slug}`;
-    router.push(newUrl);
-  };
 
-  if (loading) {
-    return (
-      <div className="container mx-auto px-4 py-8">
-        {/* カテゴリヘッダー スケルトン */}
-        <div className="mb-8">
-          <div className="h-8 bg-gray-200 rounded w-48 mb-2 animate-pulse"></div>
-          <div className="h-4 bg-gray-200 rounded w-64 animate-pulse"></div>
-        </div>
+    const foundCategory = categories.find(c => c.Slug === slug);
 
-        {/* 記事一覧 スケルトン */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Array.from({ length: 6 }).map((_, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse"
-            >
-              <div className="h-48 bg-gray-200"></div>
-              <div className="p-6">
-                <div className="h-4 bg-gray-200 rounded w-20 mb-3"></div>
-                <div className="h-6 bg-gray-200 rounded w-full mb-2"></div>
-                <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
-                <div className="h-4 bg-gray-200 rounded w-24"></div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
+    if (!foundCategory) {
+      notFound();
+      return;
+    }
+
+    category = foundCategory;
+
+    // カテゴリの記事を全件取得
+    try {
+      const response = await getCategoryArticles({
+        slug,
+        page: 1,
+        limit: 100 // 全記事取得用の大きな値
+      });
+      articles = response.articles;
+    } catch {
+      console.log('API not available for category articles, using empty array');
+      articles = [];
+    }
+  } catch (err) {
+    console.error('Error fetching category articles:', err);
+    error = '記事の取得に失敗しました。';
   }
 
   if (error) {
@@ -117,12 +92,6 @@ function CategoryPageContent() {
           <p className="text-lg text-gray-600 mb-8">
             {error}
           </p>
-          <button
-            onClick={() => window.location.reload()}
-            className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors"
-          >
-            再読み込み
-          </button>
         </div>
       </div>
     );
@@ -146,14 +115,7 @@ function CategoryPageContent() {
 
       {/* 記事一覧 */}
       {articles.length > 0 ? (
-        <>
-          <ArticleList articles={articles} />
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
-        </>
+        <ArticleList articles={articles} />
       ) : (
         <div className="text-center py-12">
           <p className="text-gray-500 text-lg">
@@ -162,36 +124,5 @@ function CategoryPageContent() {
         </div>
       )}
     </div>
-  );
-}
-
-export default function CategoryPage() {
-  return (
-    <Suspense fallback={
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <div className="h-8 bg-gray-200 rounded w-48 mb-2 animate-pulse"></div>
-          <div className="h-4 bg-gray-200 rounded w-64 animate-pulse"></div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Array.from({ length: 6 }).map((_, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse"
-            >
-              <div className="h-48 bg-gray-200"></div>
-              <div className="p-6">
-                <div className="h-4 bg-gray-200 rounded w-20 mb-3"></div>
-                <div className="h-6 bg-gray-200 rounded w-full mb-2"></div>
-                <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
-                <div className="h-4 bg-gray-200 rounded w-24"></div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    }>
-      <CategoryPageContent />
-    </Suspense>
   );
 }
