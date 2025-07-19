@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "npm run generate:types && next build",
-    "start": "next start",
+    "start": "serve out",
     "lint": "next lint",
     "generate:types": "openapi-typescript schema/openapi.yaml -o src/lib/openapi/schema.ts"
   },
@@ -14,6 +14,7 @@
     "next": "14.2.30",
     "react": "^18",
     "react-dom": "^18",
+    "serve": "^14.2.4",
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
