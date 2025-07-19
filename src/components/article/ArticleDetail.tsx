@@ -1,6 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
+import rehypeRaw from "rehype-raw";
 import type { ArticleDetailProps } from "@/lib/types";
 import { formatDate } from "@/lib/utils";
 
@@ -54,11 +57,48 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
       )}
 
       {/* Article Content */}
-      <div className="prose prose-lg max-w-none">
-        <div 
-          className="text-gray-800 leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: formatArticleBody(article.Body) }}
-        />
+      <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+        <ReactMarkdown
+          rehypePlugins={[rehypeRaw, rehypeHighlight]}
+          components={{
+            h1: ({ children }) => (
+              <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">{children}</h2>
+            ),
+            h2: ({ children }) => (
+              <h3 className="text-xl font-bold text-gray-900 mt-6 mb-3">{children}</h3>
+            ),
+            h3: ({ children }) => (
+              <h4 className="text-lg font-semibold text-gray-900 mt-4 mb-2">{children}</h4>
+            ),
+            p: ({ children }) => (
+              <p className="mb-4 leading-relaxed">{children}</p>
+            ),
+            code: ({ children, ...props }) => (
+              <code className="bg-gray-100 px-2 py-1 rounded text-sm font-mono" {...props}>
+                {children}
+              </code>
+            ),
+            pre: ({ children }) => (
+              <pre className="bg-gray-100 rounded-lg p-4 overflow-x-auto my-4">{children}</pre>
+            ),
+            ul: ({ children }) => (
+              <ul className="mb-4 ml-6 list-disc">{children}</ul>
+            ),
+            ol: ({ children }) => (
+              <ol className="mb-4 ml-6 list-decimal">{children}</ol>
+            ),
+            li: ({ children }) => (
+              <li className="mb-1">{children}</li>
+            ),
+            blockquote: ({ children }) => (
+              <blockquote className="border-l-4 border-gray-300 pl-4 py-2 my-4 italic text-gray-700">
+                {children}
+              </blockquote>
+            ),
+          }}
+        >
+          {article.Body}
+        </ReactMarkdown>
       </div>
 
       {/* Article Footer */}
@@ -89,29 +129,3 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
   );
 }
 
-// Format article body (convert markdown-like content to HTML)
-function formatArticleBody(body: string): string {
-  return body
-    // Convert headers
-    .replace(/^# (.*$)/gm, '<h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">$1</h2>')
-    .replace(/^## (.*$)/gm, '<h3 class="text-xl font-bold text-gray-900 mt-6 mb-3">$1</h3>')
-    .replace(/^### (.*$)/gm, '<h4 class="text-lg font-semibold text-gray-900 mt-4 mb-2">$1</h4>')
-    
-    // Convert code blocks
-    .replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre class="bg-gray-100 rounded-lg p-4 overflow-x-auto my-4"><code class="text-sm">$2</code></pre>')
-    
-    // Convert inline code
-    .replace(/`([^`]+)`/g, '<code class="bg-gray-100 px-2 py-1 rounded text-sm font-mono">$1</code>')
-    
-    // Convert bullet points
-    .replace(/^- (.*$)/gm, '<li class="ml-4 mb-1">$1</li>')
-    
-    // Convert paragraphs
-    .replace(/\n\n/g, '</p><p class="mb-4">')
-    .replace(/^(?!<[h|l|p|c])/gm, '<p class="mb-4">')
-    .replace(/$/g, '</p>')
-    
-    // Clean up empty paragraphs
-    .replace(/<p class="mb-4"><\/p>/g, '')
-    .replace(/<p class="mb-4">(<[h|l|p|c])/g, '$1');
-}
