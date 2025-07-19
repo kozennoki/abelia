@@ -1,4 +1,4 @@
-import { getCategoryArticles, getCategories } from '@/lib/api';
+import { getCategoryArticles, getCategories, getZennArticles } from '@/lib/api';
 import { ArticleList } from '@/components/article';
 import { mockCategories } from '@/lib/mockData';
 import { env } from '@/lib/env';
@@ -52,12 +52,18 @@ export default async function CategoryPage({
     category = foundCategory;
 
     // カテゴリの記事を全件取得
-    const response = await getCategoryArticles({
-      slug,
-      page: 1,
-      limit: 100 // 全記事取得用の大きな値
-    });
-    articles = response.articles;
+    if (slug === 'zenn') {
+      // Zennカテゴリの場合はgetZennArticlesを使用
+      articles = await getZennArticles({ limit: 100 });
+    } else {
+      // 通常カテゴリの場合はgetCategoryArticlesを使用
+      const response = await getCategoryArticles({
+        slug,
+        page: 1,
+        limit: 100 // 全記事取得用の大きな値
+      });
+      articles = response.articles;
+    }
   } catch (err) {
     console.error('Error fetching category articles:', err);
     error = '記事の取得に失敗しました。';
