@@ -11,24 +11,16 @@ export const dynamic = 'force-static';
 // generateStaticParams関数を追加（静的エクスポート用）
 export async function generateStaticParams() {
   try {
-    // API接続エラーの場合はモックデータを使用
-    let categories;
-    try {
-      categories = env.NEXT_PUBLIC_USE_MOCK
-        ? mockCategories
-        : await getCategories();
-    } catch {
-      console.log('API not available, using mock data for build');
-      categories = mockCategories;
-    }
+    const categories = env.NEXT_PUBLIC_USE_MOCK
+      ? mockCategories
+      : await getCategories();
 
     return categories.map((category) => ({
       slug: category.Slug,
     }));
   } catch (error) {
     console.error('Error generating static params for categories:', error);
-    // エラーの場合は空配列を返す
-    return [];
+    throw error; // ビルド時のエラーは適切に処理する
   }
 }
 
@@ -46,15 +38,9 @@ export default async function CategoryPage({
 
   try {
     // カテゴリの存在確認
-    let categories;
-    try {
-      categories = env.NEXT_PUBLIC_USE_MOCK
-        ? mockCategories
-        : await getCategories();
-    } catch {
-      console.log('API not available, using mock data');
-      categories = mockCategories;
-    }
+    const categories = env.NEXT_PUBLIC_USE_MOCK
+      ? mockCategories
+      : await getCategories();
 
     const foundCategory = categories.find(c => c.Slug === slug);
 
@@ -66,17 +52,12 @@ export default async function CategoryPage({
     category = foundCategory;
 
     // カテゴリの記事を全件取得
-    try {
-      const response = await getCategoryArticles({
-        slug,
-        page: 1,
-        limit: 100 // 全記事取得用の大きな値
-      });
-      articles = response.articles;
-    } catch {
-      console.log('API not available for category articles, using empty array');
-      articles = [];
-    }
+    const response = await getCategoryArticles({
+      slug,
+      page: 1,
+      limit: 100 // 全記事取得用の大きな値
+    });
+    articles = response.articles;
   } catch (err) {
     console.error('Error fetching category articles:', err);
     error = '記事の取得に失敗しました。';
