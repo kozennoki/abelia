@@ -1,7 +1,7 @@
 // Application constants
 
 // Pagination
-export const ARTICLES_PER_PAGE = 10;
+export const ARTICLES_PER_PAGE = 6;
 export const POPULAR_ARTICLES_LIMIT = 5;
 export const LATEST_ARTICLES_LIMIT = 5;
 export const MAX_VISIBLE_PAGES = 5;

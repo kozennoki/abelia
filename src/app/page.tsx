@@ -21,7 +21,7 @@ export default async function HomePage() {
 
     // Zenn記事の取得
     try {
-      zennArticles = await getZennArticles({ limit: 5 });
+      zennArticles = await getZennArticles({ limit: 3 });
     } catch (err) {
       console.error('Failed to fetch Zenn articles:', err);
       // Zenn記事の取得失敗は致命的ではないので続行
@@ -49,8 +49,7 @@ export default async function HomePage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">最新記事</h1>
-        <p className="text-gray-600">Nerine ブログの最新記事をお楽しみください</p>
+        <h2 className="text-3xl font-bold text-gray-900 mb-2">最新記事</h2>
       </div>
 
       <ArticleList articles={articles} />

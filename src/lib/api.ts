@@ -8,6 +8,7 @@ import {
   getMockLatestArticles,
   getMockArticleById,
   delay,
+  getMockZennArticles,
 } from './mockData';
 import type {
   Article,
@@ -58,7 +59,7 @@ async function apiRequest<T>(
   options: RequestInit = {}
 ): Promise<T> {
   const url = `${API_BASE_URL}${endpoint}`;
-  
+
   const headers = {
     'Content-Type': 'application/json',
     'X-API-Key': API_KEY,
@@ -85,7 +86,7 @@ async function apiRequest<T>(
     if (error instanceof ApiErrorClass) {
       throw error;
     }
-    
+
     // Network or other errors
     console.error('API request error:', error);
     throw new ApiErrorClass(
@@ -99,13 +100,13 @@ async function apiRequest<T>(
 // Build query string from parameters
 function buildQueryString(params: Record<string, unknown>): string {
   const searchParams = new URLSearchParams();
-  
+
   Object.entries(params).forEach(([key, value]) => {
     if (value !== undefined && value !== null) {
       searchParams.append(key, value.toString());
     }
   });
-  
+
   const queryString = searchParams.toString();
   return queryString ? `?${queryString}` : '';
 }
@@ -209,8 +210,7 @@ export async function healthCheckBoolean(): Promise<boolean> {
 export async function getZennArticles(params: GetZennArticlesParams = {}): Promise<Article[]> {
   if (env.NEXT_PUBLIC_USE_MOCK) {
     await delay();
-    // Return empty array for mock since we don't have mock Zenn data
-    return [];
+    return getMockZennArticles(params.limit);
   }
 
   const queryString = buildQueryString(params as Record<string, unknown>);
