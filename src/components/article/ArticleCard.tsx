@@ -85,7 +85,7 @@ export default function ArticleCard({
           <span className="flex-1">{article.Title}</span>
         </h2>
 
-        {!isCompact && (
+        {!isCompact && !isZennArticle && (
           <p className="text-sm text-gray-600 line-clamp-3 mb-2">
             {truncateText(article.Description, ARTICLE_DESCRIPTION_MAX_LENGTH)}
           </p>
