@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "npm run generate:types && next build",
+    "build:clean": "npm run clean && npm run build",
+    "clean": "rm -rf .next out",
     "start": "serve out",
     "lint": "next lint",
     "generate:types": "openapi-typescript schema/openapi.yaml -o src/lib/openapi/schema.ts"
