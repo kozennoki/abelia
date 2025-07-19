@@ -26,9 +26,11 @@ export default function ArticleCard({
     >
       {/* 記事全体のリンク */}
       <Link 
-        href={buildArticleUrl(article.ID)}
+        href={buildArticleUrl(article.ID, article.Image)}
         className="absolute inset-0 z-10"
         aria-label={`記事「${article.Title}」を読む`}
+        target={isZennArticle ? "_blank" : undefined}
+        rel={isZennArticle ? "noopener noreferrer" : undefined}
       >
         <span className="sr-only">記事「{article.Title}」を読む</span>
       </Link>

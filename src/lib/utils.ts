@@ -88,7 +88,11 @@ export function slugify(text: string): string {
 }
 
 // URL utilities
-export function buildArticleUrl(id: string): string {
+export function buildArticleUrl(id: string, imageField?: string): string {
+  // Zenn記事の場合は外部URLに遷移
+  if (imageField && isEmoji(imageField)) {
+    return `https://zenn.dev/kozennoki/articles/${id}`;
+  }
   return `/articles/${id}`;
 }
 
