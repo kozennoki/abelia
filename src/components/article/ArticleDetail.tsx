@@ -43,11 +43,11 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
 
       {/* Article Image */}
       {article.Image && (
-        <div className="mb-8">
+        <div className="mb-8 aspect-video overflow-hidden rounded-lg shadow-md">
           <img
             src={article.Image}
             alt={article.Title}
-            className="w-full h-64 md:h-80 object-cover rounded-lg shadow-md"
+            className="w-full h-full object-contain"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.style.display = 'none';

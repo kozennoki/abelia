@@ -39,14 +39,14 @@ export default function ArticleCard({
       {!isZennArticle && (
         <div
           className={cn(
-            "relative",
-            isCompact ? "w-32 h-24 flex-shrink-0" : "w-full h-48"
+            "relative overflow-hidden",
+            isCompact ? "w-32 h-18 flex-shrink-0" : "w-full aspect-video"
           )}
         >
           <img
             src={article.Image || ARTICLE_IMAGE_PLACEHOLDER}
             alt={article.Title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.src = ARTICLE_IMAGE_PLACEHOLDER;
