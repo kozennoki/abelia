@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { getArticles, getZennArticles } from '@/lib/api';
 import { ArticleList } from '@/components/article';
+import { Button } from '@/components/ui';
 import { HOME_ARTICLES_LIMIT, ZENN_ARTICLES_LIMIT } from '@/lib/constants';
 import type { Article } from '@/lib/types';
 
@@ -48,18 +48,17 @@ export default async function HomePage() {
     <div className="container mx-auto px-4 py-8">
       {/* 最新記事セクション */}
       <div className="mb-8">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-3xl font-bold text-gray-900">最新記事</h2>
-          <Link 
-            href="/articles"
-            className="text-blue-600 hover:text-blue-800 text-sm font-medium"
-          >
-            記事一覧を見る →
-          </Link>
-        </div>
+        <h2 className="text-3xl font-bold text-gray-900 mb-6">最新記事</h2>
       </div>
 
       <ArticleList articles={articles} />
+
+      {/* 記事一覧へのリンク */}
+      <div className="flex justify-center mt-8">
+        <Button href="/articles">
+          記事一覧を見る
+        </Button>
+      </div>
 
       {/* Zenn記事セクション */}
       <div className="mt-16 border-t border-gray-200 pt-8">
@@ -69,6 +68,13 @@ export default async function HomePage() {
         ) : (
           <p className="text-gray-500 py-4">Zenn記事がありません。</p>
         )}
+      </div>
+
+      {/* Zenn記事一覧へのリンク */}
+      <div className="flex justify-center mt-8">
+        <Button href="/categories/zenn">
+          Zenn記事一覧を見る
+        </Button>
       </div>
     </div>
   );
