@@ -97,7 +97,7 @@ export default async function CategoryPage({
         <div className="font-light">- {category.Name} -</div>
       </div>
 
-      <div className="border border-secondary md:mb-16 mb-8"></div>
+      <div className="border border-secondary mb-8"></div>
 
       {/* 記事一覧 */}
       {articles.length > 0 ? (

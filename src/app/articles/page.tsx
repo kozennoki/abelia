@@ -52,7 +52,7 @@ export default async function ArticlesPage() {
         <div className="font-light">- 最新記事 -</div>
       </div>
 
-      <div className="border border-secondary md:mb-16 mb-8"></div>
+      <div className="border border-secondary mb-8"></div>
 
       <ArticleList articles={articles} />
 
