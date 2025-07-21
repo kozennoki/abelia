@@ -2,6 +2,8 @@ import { Metadata } from 'next';
 import { mockCategories } from '@/lib/mockData';
 import { getCategories } from '@/lib/api';
 import { env } from '@/lib/env';
+import { SITE_NAME } from '@/lib/constants';
+import { capitalizeFirst } from '@/lib/utils';
 
 interface CategoryLayoutProps {
   children: React.ReactNode;
@@ -29,7 +31,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const category = env.NEXT_PUBLIC_USE_MOCK 
+  const category = env.NEXT_PUBLIC_USE_MOCK
     ? mockCategories.find(c => c.Slug === params.slug)
     : (await getCategories()).find(c => c.Slug === params.slug);
 
@@ -41,7 +43,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 
   return {
-    title: `${category.Name} | ブログ`,
+    title: `${capitalizeFirst(category.Slug)} | ${SITE_NAME}`,
     description: `${category.Name}に関する記事一覧です。`,
   };
 }

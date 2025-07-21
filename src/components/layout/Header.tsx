@@ -3,6 +3,7 @@ import { getCategories } from "@/lib/api";
 import { mockCategories } from "@/lib/mockData";
 import type { Category } from "@/lib/types";
 import { MobileMenu } from "./MobileMenu";
+import { capitalizeFirst } from "@/lib/utils";
 
 interface HeaderProps {
   categories?: Category[];
@@ -60,7 +61,7 @@ export default async function Header({
                     href={`/categories/${category.Slug}`}
                     className="block px-4 py-2 text-gray-700 hover:bg-secondary/20 rounded hover:text-primary transition-all duration-300 relative overflow-hidden group/item"
                   >
-                    <span className="relative z-10">{category.Name}</span>
+                    <span className="relative z-10">{capitalizeFirst(category.Slug)}</span>
                   </Link>
                 ))}
               </div>

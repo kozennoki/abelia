@@ -72,6 +72,11 @@ export function timeAgo(dateString: string): string {
 }
 
 // String utilities
+export function capitalizeFirst(text: string): string {
+  if (!text || text.length === 0) return text;
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
 export function truncateText(text: string, maxLength: number): string {
   if (text.length <= maxLength) {
     return text;
