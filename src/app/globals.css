@@ -38,4 +38,54 @@ body {
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+
+  .text-shadow-lg {
+    text-shadow: 0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .drop-shadow-3xl {
+    filter: drop-shadow(0 35px 70px rgba(0, 0, 0, 0.25));
+  }
+  
+  .bg-gradient-radial {
+    background: radial-gradient(circle, transparent 0%, rgba(0, 0, 0, 0.5) 100%);
+  }
+}
+
+/* スムーズなスクロール体験 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* パフォーマンス最適化 */
+* {
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* パララックス専用最適化 */
+.parallax-optimized {
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* カスタムスクロールバー */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

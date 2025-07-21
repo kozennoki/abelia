@@ -1,6 +1,7 @@
 import { getArticles, getZennArticles } from "@/lib/api";
 import { ArticleList } from "@/components/article";
 import { Button } from "@/components/ui";
+import { ParallaxHero } from "@/components/common";
 import { HOME_ARTICLES_LIMIT, ZENN_ARTICLES_LIMIT } from "@/lib/constants";
 import type { Article } from "@/lib/types";
 
@@ -44,24 +45,13 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* ヒーロー画像 */}
-      <div className="relative w-full h-screen overflow-hidden">
-        <img
-          src="top.jpg"
-          alt="top image"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <img
-            src="top_logo.jpg"
-            alt="site logo"
-            className="max-w-xs max-h-64 object-contain drop-shadow-lg"
-          />
-        </div>
-      </div>
+      {/* パララックスヒーローセクション */}
+      <ParallaxHero 
+        backgroundImage="top.jpg"
+        logoImage="top_logo.jpg"
+      />
 
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-16" data-section="latest">
         {/* 最新記事セクション */}
         <div className="mb-2 flex flex-row items-center">
           <h2 className="text-3xl font-bold text-gray-900 mr-4">Latest</h2>
