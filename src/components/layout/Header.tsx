@@ -36,9 +36,9 @@ export default async function Header({
             <div className="relative group">
               <Link
                 href="/"
-                className="relative text-gray-600 hover:text-gray-900 transition-all duration-300 flex items-center py-5 px-3 group"
+                className="relative font-josefin-sans text-gray-600 hover:text-gray-900 transition-all duration-300 flex items-center py-5 px-3 group"
               >
-                ホーム
+                Home
               </Link>
               {/* ヘッダー下ラインに合わせたアンダーライン */}
               <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gray-900 transition-all duration-300 origin-center -translate-x-1/2 group-hover:w-full transform"></span>
@@ -46,8 +46,8 @@ export default async function Header({
 
             {/* カテゴリドロップダウン */}
             <div className="relative group">
-              <button className="relative text-gray-600 hover:text-gray-900 transition-all duration-300 flex items-center py-5 px-3 group">
-                <span className="relative">カテゴリ</span>
+              <button className="relative font-josefin-sans text-gray-600 hover:text-gray-900 transition-all duration-300 flex items-center py-5 px-3 group">
+                <span className="relative">Category</span>
               </button>
               {/* ヘッダー下ラインに合わせたアンダーライン */}
               <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gray-900 transition-all duration-300 origin-center -translate-x-1/2 group-hover:w-full transform"></span>

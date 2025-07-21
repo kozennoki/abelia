@@ -14,6 +14,11 @@ const config: Config = {
         primary: "#1e646e",
         secondary: "#7ab6a9",
       },
+      fontFamily: {
+        'noto-sans-jp': ['var(--font-noto-sans-jp)', 'sans-serif'],
+        'josefin-sans': ['var(--font-josefin-sans)', 'sans-serif'],
+        'sans': ['var(--font-josefin-sans)', 'var(--font-noto-sans-jp)', 'sans-serif'],
+      },
     },
   },
   plugins: [],
