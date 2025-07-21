@@ -45,6 +45,18 @@ export default async function Header({
               <span className="absolute -bottom-0.5 left-1/2 w-0 h-1 bg-gray-900 transition-all duration-300 origin-center -translate-x-1/2 group-hover:w-full transform"></span>
             </div>
 
+            {/* 記事一覧ページ */}
+            <div className="relative group">
+              <Link
+                href="/articles"
+                className="relative font-josefin-sans text-gray-600 hover:text-gray-900 transition-all duration-300 flex items-center py-7 px-4 group"
+              >
+                Articles
+              </Link>
+              {/* ヘッダー下ラインに合わせたアンダーライン */}
+              <span className="absolute -bottom-0.5 left-1/2 w-0 h-1 bg-gray-900 transition-all duration-300 origin-center -translate-x-1/2 group-hover:w-full transform"></span>
+            </div>
+
             {/* カテゴリドロップダウン */}
             <div className="relative group">
               <button className="relative font-josefin-sans text-gray-600 hover:text-gray-900 transition-all duration-300 flex items-center py-7 px-4 group">

@@ -7,7 +7,7 @@ import type { Article } from "@/lib/types";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: `記事一覧 | ${SITE_NAME}`,
+  title: `Articles | ${SITE_NAME}`,
   description: `${SITE_NAME}ブログの記事一覧をご覧ください`,
 };
 
@@ -44,10 +44,15 @@ export default async function ArticlesPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">記事一覧</h2>
+    <div className="container mx-auto px-4 md:py-20 py-6">
+      <div className="mb-2 flex flex-row items-center">
+        <h1 className="text-3xl font-bold text-gray-900 pr-4">
+          Recent
+        </h1>
+        <div className="font-light">- 最新記事 -</div>
       </div>
+
+      <div className="border border-secondary md:mb-16 mb-8"></div>
 
       <ArticleList articles={articles} />
 

@@ -65,6 +65,20 @@ export function MobileMenu({ categories }: MobileMenuProps) {
             Home
           </Link>
 
+          <Link
+            href="/articles"
+            className="block px-3 py-2 font-medium text-gray-600 active:text-gray-900 active:bg-gray-50 rounded-md transition-colors duration-200"
+            onClick={() => setIsMobileMenuOpen(false)}
+            style={{
+              animation: isMobileMenuOpen
+                ? 'slideInFromLeft 0.3s ease-out forwards'
+                : 'none',
+              animationDelay: '50ms'
+            }}
+          >
+            Articles
+          </Link>
+
           {/* Mobile category menu */}
           <div className="px-3 py-2">
             <div 
@@ -73,7 +87,7 @@ export function MobileMenu({ categories }: MobileMenuProps) {
                 animation: isMobileMenuOpen
                   ? 'slideInFromLeft 0.3s ease-out forwards'
                   : 'none',
-                animationDelay: '100ms'
+                animationDelay: '150ms'
               }}
             >
               Category
@@ -89,7 +103,7 @@ export function MobileMenu({ categories }: MobileMenuProps) {
                     animation: isMobileMenuOpen
                       ? 'slideInFromLeft 0.3s ease-out forwards'
                       : 'none',
-                    animationDelay: isMobileMenuOpen ? `${(index + 2) * 100}ms` : '0ms',
+                    animationDelay: isMobileMenuOpen ? `${(index + 3) * 50 + 150}ms` : '0ms',
                     opacity: 0,
                   }}
                 >

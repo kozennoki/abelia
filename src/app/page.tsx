@@ -46,7 +46,7 @@ export default async function HomePage() {
   return (
     <div className="-mt-16 md:-mt-20">
       {/* パララックスヒーローセクション */}
-      <ParallaxHero 
+      <ParallaxHero
         backgroundImage="top.jpg"
         logoImage="top_logo.jpg"
       />
@@ -54,7 +54,7 @@ export default async function HomePage() {
       <div className="container mx-auto px-4 py-16" data-section="latest">
         {/* 最新記事セクション */}
         <div className="mb-2 flex flex-row items-center">
-          <h2 className="text-3xl font-bold text-gray-900 mr-4">Latest</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mr-4">Recent</h2>
           <div className="font-light">- 最新記事 -</div>
         </div>
 

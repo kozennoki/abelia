@@ -17,7 +17,7 @@ export async function generateStaticParams() {
   try {
     const response = await getArticles({ limit: 1 });
     const totalPages = Math.ceil((response.pagination?.total || 0) / ARTICLES_PER_PAGE);
-    
+
     return Array.from({ length: totalPages }, (_, i) => ({
       page: (i + 2).toString(), // Start from page 2 since page 1 is handled by /articles
     }));
@@ -33,9 +33,9 @@ export async function generateStaticParams() {
 // Generate metadata for SEO
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const pageNumber = parseInt(params.page, 10);
-  
+
   return {
-    title: `記事一覧 - ページ ${pageNumber} | ${SITE_NAME}`,
+    title: `Recent - page.${pageNumber} | ${SITE_NAME}`,
     description: `${SITE_NAME} ブログの記事一覧 ${pageNumber}ページ目`,
   };
 }
@@ -57,7 +57,7 @@ export default async function ArticlesPagedPage({ params }: PageProps) {
       page: pageNumber,
       limit: ARTICLES_PER_PAGE
     });
-    
+
     articles = response.articles;
     totalPages = Math.ceil((response.pagination?.total || 0) / ARTICLES_PER_PAGE);
 
@@ -86,13 +86,15 @@ export default async function ArticlesPagedPage({ params }: PageProps) {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          記事一覧 - ページ {pageNumber}
+    <div className="container mx-auto px-4 md:py-20 py-6">
+      <div className="mb-2 flex flex-row items-center">
+        <h1 className="text-3xl font-bold text-gray-900 pr-4">
+          Recent
         </h1>
-        <p className="text-gray-600">{SITE_NAME} ブログの記事をお楽しみください</p>
+        <div className="font-light">- 最新記事 Page.{pageNumber} -</div>
       </div>
+
+      <div className="border border-secondary mb-8"></div>
 
       <ArticleList articles={articles} />
 
