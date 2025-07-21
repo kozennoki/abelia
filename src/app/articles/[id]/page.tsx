@@ -1,8 +1,9 @@
-import { notFound } from 'next/navigation';
-import { getArticle, getArticles } from '@/lib/api';
-import { ArticleDetail } from '@/components/article';
-import type { Article } from '@/lib/types';
-import type { Metadata } from 'next';
+import { notFound } from "next/navigation";
+import { getArticle, getArticles } from "@/lib/api";
+import { ArticleDetail } from "@/components/article";
+import { SITE_NAME } from "@/lib/constants";
+import type { Article } from "@/lib/types";
+import type { Metadata } from "next";
 
 interface ArticlePageProps {
   params: {
@@ -18,40 +19,42 @@ export async function generateStaticParams() {
       id: article.ID,
     }));
   } catch (error) {
-    console.error('Error generating static params:', error);
+    console.error("Error generating static params:", error);
     return [];
   }
 }
 
 // Generate metadata for SEO
-export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: ArticlePageProps): Promise<Metadata> {
   try {
     const article = await getArticle(params.id);
-    
+
     return {
-      title: `${article.Title} | Nerine Blog`,
+      title: `${article.Title} | ${SITE_NAME}`,
       description: article.Description,
       openGraph: {
         title: article.Title,
         description: article.Description,
-        type: 'article',
+        type: "article",
         publishedTime: article.CreatedAt,
         modifiedTime: article.UpdatedAt,
         images: article.Image ? [{ url: article.Image }] : [],
         section: article.Category.Name,
       },
       twitter: {
-        card: 'summary_large_image',
+        card: "summary_large_image",
         title: article.Title,
         description: article.Description,
         images: article.Image ? [article.Image] : [],
       },
     };
   } catch (error) {
-    console.error('Error generating metadata:', error);
+    console.error("Error generating metadata:", error);
     return {
-      title: 'Article Not Found | Nerine Blog',
-      description: 'The requested article could not be found.',
+      title: `Article Not Found | ${SITE_NAME}`,
+      description: "The requested article could not be found.",
     };
   }
 }
@@ -62,7 +65,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   try {
     article = await getArticle(params.id);
   } catch (error) {
-    console.error('Error fetching article:', error);
+    console.error("Error fetching article:", error);
     notFound();
   }
 

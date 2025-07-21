@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { getArticles } from '@/lib/api';
 import { ArticleList } from '@/components/article';
 import { PaginationLinks } from '@/components/common';
-import { ARTICLES_PER_PAGE } from '@/lib/constants';
+import { ARTICLES_PER_PAGE, SITE_NAME } from '@/lib/constants';
 import type { Article } from '@/lib/types';
 import type { Metadata } from 'next';
 
@@ -35,8 +35,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const pageNumber = parseInt(params.page, 10);
   
   return {
-    title: `記事一覧 - ページ ${pageNumber} | Nerine Blog`,
-    description: `Nerine ブログの記事一覧 ${pageNumber}ページ目`,
+    title: `記事一覧 - ページ ${pageNumber} | ${SITE_NAME}`,
+    description: `${SITE_NAME} ブログの記事一覧 ${pageNumber}ページ目`,
   };
 }
 
@@ -91,7 +91,7 @@ export default async function ArticlesPagedPage({ params }: PageProps) {
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
           記事一覧 - ページ {pageNumber}
         </h1>
-        <p className="text-gray-600">Nerine ブログの記事をお楽しみください</p>
+        <p className="text-gray-600">{SITE_NAME} ブログの記事をお楽しみください</p>
       </div>
 
       <ArticleList articles={articles} />
