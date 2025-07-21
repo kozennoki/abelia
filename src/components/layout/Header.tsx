@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { SITE_NAME } from "@/lib/constants";
 import { getCategories } from "@/lib/api";
 import { mockCategories } from "@/lib/mockData";
 import type { Category } from "@/lib/types";
@@ -28,11 +27,8 @@ export default async function Header({
       <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between">
           <div className="flex items-center space-x-8">
-            <Link
-              href="/"
-              className="text-2xl font-bold text-gray-900 hover:text-gray-700 py-4"
-            >
-              {SITE_NAME}
+            <Link href="/">
+              <img src="/logo.jpg" alt="logo image" className="h-16"></img>
             </Link>
           </div>
 
