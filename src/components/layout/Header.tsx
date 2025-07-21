@@ -36,7 +36,18 @@ export default async function Header({
             </Link>
           </div>
 
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center">
+            <div className="relative group">
+              <Link
+                href="/"
+                className="relative text-gray-600 hover:text-gray-900 transition-all duration-300 flex items-center py-5 px-3 group"
+              >
+                ホーム
+              </Link>
+              {/* ヘッダー下ラインに合わせたアンダーライン */}
+              <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gray-900 transition-all duration-300 origin-center -translate-x-1/2 group-hover:w-full transform"></span>
+            </div>
+
             {/* カテゴリドロップダウン */}
             <div className="relative group">
               <button className="relative text-gray-600 hover:text-gray-900 transition-all duration-300 flex items-center py-5 px-3 group">
