@@ -1,13 +1,14 @@
-import { getArticles } from '@/lib/api';
-import { ArticleList } from '@/components/article';
-import { PaginationLinks } from '@/components/common';
-import { ARTICLES_PER_PAGE } from '@/lib/constants';
-import type { Article } from '@/lib/types';
-import type { Metadata } from 'next';
+import { getArticles } from "@/lib/api";
+import { ArticleList } from "@/components/article";
+import { PaginationLinks } from "@/components/common";
+import { ARTICLES_PER_PAGE } from "@/lib/constants";
+import { SITE_NAME } from "@/lib/constants";
+import type { Article } from "@/lib/types";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: '記事一覧 | Nerine Blog',
-  description: 'Nerine ブログの記事一覧をご覧ください',
+  title: `記事一覧 | ${SITE_NAME}`,
+  description: `${SITE_NAME}ブログの記事一覧をご覧ください`,
 };
 
 export default async function ArticlesPage() {
@@ -18,13 +19,15 @@ export default async function ArticlesPage() {
   try {
     const response = await getArticles({
       page: 1,
-      limit: ARTICLES_PER_PAGE
+      limit: ARTICLES_PER_PAGE,
     });
     articles = response.articles;
-    totalPages = Math.ceil((response.pagination?.total || 0) / ARTICLES_PER_PAGE);
+    totalPages = Math.ceil(
+      (response.pagination?.total || 0) / ARTICLES_PER_PAGE
+    );
   } catch (err) {
-    console.error('Failed to fetch articles:', err);
-    error = '記事の取得に失敗しました。';
+    console.error("Failed to fetch articles:", err);
+    error = "記事の取得に失敗しました。";
   }
 
   if (error) {
@@ -34,9 +37,7 @@ export default async function ArticlesPage() {
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             エラーが発生しました
           </h1>
-          <p className="text-lg text-gray-600 mb-8">
-            {error}
-          </p>
+          <p className="text-lg text-gray-600 mb-8">{error}</p>
         </div>
       </div>
     );
@@ -45,10 +46,7 @@ export default async function ArticlesPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          記事一覧
-        </h1>
-        <p className="text-gray-600">Nerine ブログの記事をお楽しみください</p>
+        <h2 className="text-3xl font-bold text-gray-900 mb-2">記事一覧</h2>
       </div>
 
       <ArticleList articles={articles} />
