@@ -17,8 +17,8 @@ export const DEFAULT_ARTICLE_IMAGE = '/images/default-article.jpg';
 export const ARTICLE_IMAGE_PLACEHOLDER = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiIgZmlsbD0iIzk5YTNhZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pgo8L3N2Zz4K';
 
 // Site metadata
-export const SITE_NAME = 'Nerine Blog';
-export const SITE_DESCRIPTION = 'A modern blog powered by Nerine';
+export const SITE_NAME = '浩然之気';
+export const SITE_DESCRIPTION = '然のブログです。';
 
 // Cache
 export const CACHE_REVALIDATE_SECONDS = 3600; // 1 hour
