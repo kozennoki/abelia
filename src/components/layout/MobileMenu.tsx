@@ -13,10 +13,10 @@ export function MobileMenu({ categories }: MobileMenuProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="md:hidden">
+    <div className="md:hidden flex items-center h-16">
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="text-gray-600 focus:outline-none focus:text-gray-900 relative"
+        className="text-gray-600 focus:outline-none focus:text-gray-900 relative p-2"
       >
         <div className="relative w-6 h-6">
           {/* Hamburger lines */}

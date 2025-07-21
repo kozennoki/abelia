@@ -25,9 +25,13 @@ export default async function Header({
 
   return (
     <header className="border-b border-gray-200 bg-white fixed top-0 left-0 right-0 z-50">
-      <div className="px-6">
+      <div className="md:px-16 px-6">
         <nav className="flex items-center justify-between">
-          <div className="flex items-center space-x-8">
+          {/* モバイル用: 左側の空スペース */}
+          <div className="w-12 md:hidden"></div>
+
+          {/* モバイル: ロゴを中央、PC: 左寄せ */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 md:relative md:left-auto md:transform-none flex items-center space-x-8">
             <Link href="/">
               <img src="/logo.jpg" alt="logo image" className="h-16"></img>
             </Link>
