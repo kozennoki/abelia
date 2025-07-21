@@ -1,8 +1,8 @@
-import { getArticles, getZennArticles } from '@/lib/api';
-import { ArticleList } from '@/components/article';
-import { Button } from '@/components/ui';
-import { HOME_ARTICLES_LIMIT, ZENN_ARTICLES_LIMIT } from '@/lib/constants';
-import type { Article } from '@/lib/types';
+import { getArticles, getZennArticles } from "@/lib/api";
+import { ArticleList } from "@/components/article";
+import { Button } from "@/components/ui";
+import { HOME_ARTICLES_LIMIT, ZENN_ARTICLES_LIMIT } from "@/lib/constants";
+import type { Article } from "@/lib/types";
 
 export default async function HomePage() {
   let articles: Article[] = [];
@@ -13,7 +13,7 @@ export default async function HomePage() {
     // 記事の取得（6件のみ）
     const response = await getArticles({
       page: 1,
-      limit: HOME_ARTICLES_LIMIT
+      limit: HOME_ARTICLES_LIMIT,
     });
     articles = response.articles;
 
@@ -21,12 +21,12 @@ export default async function HomePage() {
     try {
       zennArticles = await getZennArticles({ limit: ZENN_ARTICLES_LIMIT });
     } catch (err) {
-      console.error('Failed to fetch Zenn articles:', err);
+      console.error("Failed to fetch Zenn articles:", err);
       // Zenn記事の取得失敗は致命的ではないので続行
     }
   } catch (err) {
-    console.error('Failed to fetch articles:', err);
-    error = '記事の取得に失敗しました。';
+    console.error("Failed to fetch articles:", err);
+    error = "記事の取得に失敗しました。";
   }
 
   if (error) {
@@ -36,9 +36,7 @@ export default async function HomePage() {
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             エラーが発生しました
           </h1>
-          <p className="text-lg text-gray-600 mb-8">
-            {error}
-          </p>
+          <p className="text-lg text-gray-600 mb-8">{error}</p>
         </div>
       </div>
     );
@@ -47,22 +45,24 @@ export default async function HomePage() {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* 最新記事セクション */}
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">最新記事</h2>
+      <div className="mb-2 flex flex-row items-center">
+        <h2 className="text-3xl font-bold text-gray-900 mr-4">Latest</h2>
+        <div className="font-light">- 最新記事 -</div>
       </div>
+
+      <div className="border border-secondary md:mb-16 mb-8"></div>
 
       <ArticleList articles={articles} />
 
       {/* 記事一覧へのリンク */}
       <div className="flex justify-center mt-8">
-        <Button href="/articles">
-          記事一覧を見る
-        </Button>
+        <Button href="/articles">View More</Button>
       </div>
 
       {/* Zenn記事セクション */}
-      <div className="mt-16 border-t border-gray-200 pt-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Zenn記事</h2>
+      <div className="mt-16 border-t border-gray-200 pt-16">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Zenn</h2>
+        <div className="border border-secondary md:mb-16 mb-8"></div>
         {zennArticles.length > 0 ? (
           <ArticleList articles={zennArticles} />
         ) : (
@@ -72,9 +72,7 @@ export default async function HomePage() {
 
       {/* Zenn記事一覧へのリンク */}
       <div className="flex justify-center mt-8">
-        <Button href="/categories/zenn">
-          Zenn記事一覧を見る
-        </Button>
+        <Button href="/categories/zenn">View More</Button>
       </div>
     </div>
   );
