@@ -10,14 +10,14 @@ export default async function HomePage() {
   let error: string | null = null;
 
   try {
-    // 記事の取得（6件のみ）
+    // 記事の取得
     const response = await getArticles({
       page: 1,
       limit: HOME_ARTICLES_LIMIT,
     });
     articles = response.articles;
 
-    // Zenn記事の取得（3件）
+    // Zenn記事の取得
     try {
       zennArticles = await getZennArticles({ limit: ZENN_ARTICLES_LIMIT });
     } catch (err) {
@@ -43,37 +43,56 @@ export default async function HomePage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      {/* 最新記事セクション */}
-      <div className="mb-2 flex flex-row items-center">
-        <h2 className="text-3xl font-bold text-gray-900 mr-4">Latest</h2>
-        <div className="font-light">- 最新記事 -</div>
+    <>
+      {/* ヒーロー画像 */}
+      <div className="relative w-full h-screen overflow-hidden">
+        <img
+          src="top.jpg"
+          alt="top image"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <img
+            src="top_logo.jpg"
+            alt="site logo"
+            className="max-w-xs max-h-64 object-contain drop-shadow-lg"
+          />
+        </div>
       </div>
 
-      <div className="border border-secondary md:mb-16 mb-8"></div>
+      <div className="container mx-auto px-4 py-16">
+        {/* 最新記事セクション */}
+        <div className="mb-2 flex flex-row items-center">
+          <h2 className="text-3xl font-bold text-gray-900 mr-4">Latest</h2>
+          <div className="font-light">- 最新記事 -</div>
+        </div>
 
-      <ArticleList articles={articles} />
+        <div className="border border-secondary mb-8"></div>
 
-      {/* 記事一覧へのリンク */}
-      <div className="flex justify-center mt-8">
-        <Button href="/articles">View More</Button>
+        <ArticleList articles={articles} />
+
+        {/* 記事一覧へのリンク */}
+        <div className="flex justify-center mt-8">
+          <Button href="/articles">View More</Button>
+        </div>
+
+        {/* Zenn記事セクション */}
+        <div className="mt-16 border-t border-gray-200 pt-16">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Zenn</h2>
+          <div className="border border-secondary mb-8"></div>
+          {zennArticles.length > 0 ? (
+            <ArticleList articles={zennArticles} />
+          ) : (
+            <p className="text-gray-500 py-4">Zenn記事がありません。</p>
+          )}
+        </div>
+
+        {/* Zenn記事一覧へのリンク */}
+        <div className="flex justify-center mt-8">
+          <Button href="/categories/zenn">VIEW MORE</Button>
+        </div>
       </div>
-
-      {/* Zenn記事セクション */}
-      <div className="mt-16 border-t border-gray-200 pt-16">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Zenn</h2>
-        <div className="border border-secondary md:mb-16 mb-8"></div>
-        {zennArticles.length > 0 ? (
-          <ArticleList articles={zennArticles} />
-        ) : (
-          <p className="text-gray-500 py-4">Zenn記事がありません。</p>
-        )}
-      </div>
-
-      {/* Zenn記事一覧へのリンク */}
-      <div className="flex justify-center mt-8">
-        <Button href="/categories/zenn">View More</Button>
-      </div>
-    </div>
+    </>
   );
 }

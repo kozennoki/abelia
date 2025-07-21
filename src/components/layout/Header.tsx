@@ -24,8 +24,8 @@ export default async function Header({
   }
 
   return (
-    <header className="border-b border-gray-200 bg-white relative">
-      <div className="container mx-auto px-4">
+    <header className="border-b border-gray-200 bg-white fixed top-0 left-0 right-0 z-50">
+      <div className="px-6">
         <nav className="flex items-center justify-between">
           <div className="flex items-center space-x-8">
             <Link href="/">
@@ -37,21 +37,21 @@ export default async function Header({
             <div className="relative group">
               <Link
                 href="/"
-                className="relative font-josefin-sans text-gray-600 hover:text-gray-900 transition-all duration-300 flex items-center py-5 px-3 group"
+                className="relative font-josefin-sans text-gray-600 hover:text-gray-900 transition-all duration-300 flex items-center py-7 px-4 group"
               >
                 Home
               </Link>
               {/* ヘッダー下ラインに合わせたアンダーライン */}
-              <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gray-900 transition-all duration-300 origin-center -translate-x-1/2 group-hover:w-full transform"></span>
+              <span className="absolute -bottom-0.5 left-1/2 w-0 h-1 bg-gray-900 transition-all duration-300 origin-center -translate-x-1/2 group-hover:w-full transform"></span>
             </div>
 
             {/* カテゴリドロップダウン */}
             <div className="relative group">
-              <button className="relative font-josefin-sans text-gray-600 hover:text-gray-900 transition-all duration-300 flex items-center py-5 px-3 group">
+              <button className="relative font-josefin-sans text-gray-600 hover:text-gray-900 transition-all duration-300 flex items-center py-7 px-4 group">
                 <span className="relative">Category</span>
               </button>
               {/* ヘッダー下ラインに合わせたアンダーライン */}
-              <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gray-900 transition-all duration-300 origin-center -translate-x-1/2 group-hover:w-full transform"></span>
+              <span className="absolute -bottom-0.5 left-1/2 w-0 h-1 bg-gray-900 transition-all duration-300 origin-center -translate-x-1/2 group-hover:w-full transform"></span>
 
               {/* ドロップダウンメニュー */}
               <div className="absolute left-0 w-48 bg-white rounded-md shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 z-50">
