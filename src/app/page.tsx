@@ -44,7 +44,7 @@ export default async function HomePage() {
   }
 
   return (
-    <>
+    <div className="-mt-16 md:-mt-20">
       {/* パララックスヒーローセクション */}
       <ParallaxHero 
         backgroundImage="top.jpg"
@@ -83,6 +83,6 @@ export default async function HomePage() {
           <Button href="/categories/zenn">VIEW MORE</Button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
