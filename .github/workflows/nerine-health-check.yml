@@ -1,0 +1,47 @@
+name: Nerine Health Check
+
+on:
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+
+      - name: Start Nerine API
+        run: |
+          docker pull ghcr.io/kozennoki/nerine:latest
+          docker run -d --name nerine \
+            -p 8080:8080 \
+            -e MICROCMS_API_KEY="${{ secrets.MICROCMS_API_KEY }}" \
+            -e MICROCMS_SERVICE_ID="${{ secrets.MICROCMS_SERVICE_ID }}" \
+            -e NERINE_API_KEY="${{ secrets.NERINE_API_KEY }}" \
+            -e PORT=8080 \
+            ghcr.io/kozennoki/nerine:latest
+
+      - name: Wait for API
+        run: |
+          timeout 90 bash -c 'while ! curl -s http://localhost:8080/health >/dev/null; do
+            sleep 3;
+          done'
+
+      - name: Health Check
+        run: |
+          response=$(curl -s http://localhost:8080/health)
+          status=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/health)
+
+          echo "Response: $response"
+          echo "Status: $status"
+
+          if [ "$status" != "200" ]; then
+            exit 1
+          fi
+
+      - name: Cleanup
+        if: always()
+        run: |
+          docker stop nerine 2>/dev/null || true
+          docker rm nerine 2>/dev/null || true
