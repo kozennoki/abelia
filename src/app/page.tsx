@@ -47,8 +47,8 @@ export default async function HomePage() {
     <div className="-mt-16 md:-mt-20">
       {/* パララックスヒーローセクション */}
       <ParallaxHero
-        backgroundImage="top.jpg"
-        logoImage="top_logo.jpg"
+        backgroundImage="/top.jpg"
+        logoImage="/top_logo.jpg"
       />
 
       <div className="container mx-auto px-4 py-16" data-section="latest">
