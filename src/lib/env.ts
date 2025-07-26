@@ -3,6 +3,7 @@ export const env = {
   NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080',
   NEXT_PUBLIC_API_KEY: process.env.NEXT_PUBLIC_API_KEY || '',
   NEXT_PUBLIC_USE_MOCK: process.env.NEXT_PUBLIC_USE_MOCK === 'true',
+  NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID || '',
 } as const;
 
 // Validation function to ensure required environment variables are set
@@ -21,4 +22,5 @@ export interface ProcessEnv {
   NEXT_PUBLIC_API_URL: string;
   NEXT_PUBLIC_API_KEY: string;
   NEXT_PUBLIC_USE_MOCK: string;
+  NEXT_PUBLIC_GA_ID: string;
 }
