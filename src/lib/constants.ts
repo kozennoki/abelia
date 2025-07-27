@@ -19,6 +19,22 @@ export const ARTICLE_IMAGE_PLACEHOLDER = 'data:image/svg+xml;base64,PHN2ZyB3aWR0
 // Site metadata
 export const SITE_NAME = '浩然之気';
 export const SITE_DESCRIPTION = '然のブログです。';
+export const SITE_URL = 'https://kozennoki.com';
+
+// Author information
+export const AUTHOR_NAME = '然';
+export const AUTHOR_TWITTER = '@kozennoki';
+
+// Common metadata descriptions
+export const BLOG_DESCRIPTION_SUFFIX = 'で公開している技術記事やブログ記事をご覧いただけます。';
+export const TECH_BLOG_DESCRIPTION = 'プログラミングやテクノロジーに関する最新の情報をお届けします。';
+export const CATEGORY_DESCRIPTION_TEMPLATE = (categoryName: string) =>
+  `${categoryName}に関する記事の一覧ページです。${SITE_NAME}${BLOG_DESCRIPTION_SUFFIX}`;
+export const ARTICLES_LIST_DESCRIPTION = `${SITE_NAME}${BLOG_DESCRIPTION_SUFFIX}${TECH_BLOG_DESCRIPTION}`;
+
+// Error messages
+export const ERROR_ARTICLE_NOT_FOUND = 'The requested article could not be found.';
+export const ERROR_CATEGORY_NOT_FOUND = '指定されたカテゴリは存在しません。';
 
 // Cache
 export const CACHE_REVALIDATE_SECONDS = 3600; // 1 hour
