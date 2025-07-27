@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import { getArticle, getArticles } from "@/lib/api";
 import { ArticleDetail } from "@/components/article";
-import { SITE_NAME } from "@/lib/constants";
+import { ArticleSchema, BreadcrumbSchema } from "@/components/common";
+import { SITE_NAME, SITE_URL, AUTHOR_NAME, AUTHOR_TWITTER, ERROR_ARTICLE_NOT_FOUND } from "@/lib/constants";
 import type { Article } from "@/lib/types";
 import type { Metadata } from "next";
 
@@ -32,29 +33,38 @@ export async function generateMetadata({
     const article = await getArticle(params.id);
 
     return {
-      title: `${article.Title} | ${SITE_NAME}`,
+      title: article.Title,
       description: article.Description,
+      authors: [{ name: AUTHOR_NAME }],
+      keywords: [article.Category.Name, "ブログ", "技術記事"],
       openGraph: {
         title: article.Title,
         description: article.Description,
         type: "article",
         publishedTime: article.CreatedAt,
         modifiedTime: article.UpdatedAt,
-        images: article.Image ? [{ url: article.Image }] : [],
+        images: article.Image ? [{ url: article.Image, alt: article.Title }] : [],
         section: article.Category.Name,
+        url: `${SITE_URL}/articles/${params.id}`,
+        siteName: SITE_NAME,
+        authors: [AUTHOR_NAME],
       },
       twitter: {
         card: "summary_large_image",
         title: article.Title,
         description: article.Description,
-        images: article.Image ? [article.Image] : [],
+        images: article.Image ? [{ url: article.Image, alt: article.Title }] : [],
+        creator: AUTHOR_TWITTER,
+      },
+      alternates: {
+        canonical: `${SITE_URL}/articles/${params.id}`,
       },
     };
   } catch (error) {
     console.error("Error generating metadata:", error);
     return {
       title: `Article Not Found | ${SITE_NAME}`,
-      description: "The requested article could not be found.",
+      description: ERROR_ARTICLE_NOT_FOUND,
     };
   }
 }
@@ -69,9 +79,19 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     notFound();
   }
 
+  const breadcrumbItems = [
+    { name: SITE_NAME, url: SITE_URL },
+    { name: "Articles", url: `${SITE_URL}/articles` },
+    { name: article.Title, url: `${SITE_URL}/articles/${article.ID}` },
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <ArticleDetail article={article} />
-    </div>
+    <>
+      <ArticleSchema article={article} />
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <div className="container mx-auto px-4 py-8">
+        <ArticleDetail article={article} />
+      </div>
+    </>
   );
 }
