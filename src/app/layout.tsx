@@ -3,7 +3,8 @@ import { Noto_Sans_JP, Josefin_Sans } from "next/font/google";
 import "./globals.css";
 import { Header, Footer } from "@/components/layout";
 import { GoogleAnalytics } from "@/components/analytics";
-import { SITE_NAME, SITE_DESCRIPTION } from "@/lib/constants";
+import { WebsiteSchema } from "@/components/common";
+import { SITE_NAME, SITE_DESCRIPTION, SITE_URL, AUTHOR_NAME } from "@/lib/constants";
 import { env } from "@/lib/env";
 
 const notoSansJP = Noto_Sans_JP({
@@ -19,8 +20,38 @@ const josefinSans = Josefin_Sans({
 });
 
 export const metadata: Metadata = {
-  title: SITE_NAME,
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
+  },
   description: SITE_DESCRIPTION,
+  authors: [{ name: AUTHOR_NAME }],
+  creator: AUTHOR_NAME,
+  openGraph: {
+    type: "website",
+    locale: "ja_JP",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -34,6 +65,7 @@ export default function RootLayout({
         className={`${notoSansJP.variable} ${josefinSans.variable} antialiased min-h-screen flex flex-col`}
       >
         <GoogleAnalytics gaId={env.NEXT_PUBLIC_GA_ID} />
+        <WebsiteSchema />
         <Header />
         <main className="flex-1 pt-16 md:pt-20">
           {children}
