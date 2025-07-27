@@ -1,0 +1,16 @@
+{
+  "name": "浩然之気",
+  "short_name": "浩然之気",
+  "description": "然のブログです。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1f2937",
+  "icons": [
+    {
+      "src": "/icon-250.png",
+      "sizes": "250x250",
+      "type": "image/png"
+    }
+  ]
+}
