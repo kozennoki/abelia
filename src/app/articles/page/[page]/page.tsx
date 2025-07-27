@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { getArticles } from '@/lib/api';
 import { ArticleList } from '@/components/article';
 import { PaginationLinks } from '@/components/common';
-import { ARTICLES_PER_PAGE, SITE_NAME } from '@/lib/constants';
+import { ARTICLES_PER_PAGE, SITE_NAME, SITE_URL, BLOG_DESCRIPTION_SUFFIX } from '@/lib/constants';
 import type { Article } from '@/lib/types';
 import type { Metadata } from 'next';
 
@@ -33,10 +33,31 @@ export async function generateStaticParams() {
 // Generate metadata for SEO
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const pageNumber = parseInt(params.page, 10);
+  const title = `Recent - page.(${pageNumber})`;
+  const description = `${SITE_NAME}${BLOG_DESCRIPTION_SUFFIX}${pageNumber}ページ目をご覧ください。`;
 
   return {
-    title: `Recent - page.${pageNumber} | ${SITE_NAME}`,
-    description: `${SITE_NAME} ブログの記事一覧 ${pageNumber}ページ目`,
+    title,
+    description,
+    openGraph: {
+      title: `${title} | ${SITE_NAME}`,
+      description,
+      type: "website",
+      url: `${SITE_URL}/articles/page/${pageNumber}`,
+      siteName: SITE_NAME,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | ${SITE_NAME}`,
+      description,
+    },
+    alternates: {
+      canonical: `${SITE_URL}/articles/page/${pageNumber}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

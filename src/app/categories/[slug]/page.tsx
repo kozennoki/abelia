@@ -3,11 +3,19 @@ import { ArticleList } from "@/components/article";
 import { mockCategories } from "@/lib/mockData";
 import { env } from "@/lib/env";
 import type { Article, Category } from "@/lib/types";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { capitalizeFirst } from "@/lib/utils";
+import { SITE_NAME, SITE_URL, CATEGORY_DESCRIPTION_TEMPLATE, ERROR_CATEGORY_NOT_FOUND } from "@/lib/constants";
 
 // 静的エクスポート用設定
 export const dynamic = "force-static";
+
+interface CategoryPageProps {
+  params: {
+    slug: string;
+  };
+}
 
 // generateStaticParams関数を追加（静的エクスポート用）
 export async function generateStaticParams() {
@@ -25,12 +33,59 @@ export async function generateStaticParams() {
   }
 }
 
-// サーバーサイドで実行される関数
-export default async function CategoryPage({
+// Generate metadata for SEO
+export async function generateMetadata({
   params,
-}: {
-  params: { slug: string };
-}) {
+}: CategoryPageProps): Promise<Metadata> {
+  const { slug } = params;
+
+  try {
+    const categories = env.NEXT_PUBLIC_USE_MOCK
+      ? mockCategories
+      : await getCategories();
+
+    const category = categories.find((c) => c.Slug === slug);
+
+    if (!category) {
+      return {
+        title: `カテゴリが見つかりません`,
+        description: ERROR_CATEGORY_NOT_FOUND,
+      };
+    }
+
+    const title = `${category.Name}の記事一覧`;
+    const description = CATEGORY_DESCRIPTION_TEMPLATE(category.Name);
+
+    return {
+      title,
+      description,
+      openGraph: {
+        title,
+        description,
+        type: "website",
+        url: `${SITE_URL}/categories/${slug}`,
+        siteName: SITE_NAME,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+      },
+      alternates: {
+        canonical: `${SITE_URL}/categories/${slug}`,
+      },
+    };
+  } catch (error) {
+    console.error("Error generating metadata for category:", error);
+    return {
+      title: `カテゴリ | ${SITE_NAME}`,
+      description: "カテゴリページです。",
+    };
+  }
+}
+
+// サーバーサイドで実行される関数
+export default async function CategoryPage({ params }: CategoryPageProps) {
   const { slug } = params;
 
   let category: Category | null = null;

@@ -1,14 +1,28 @@
 import { getArticles } from "@/lib/api";
 import { ArticleList } from "@/components/article";
 import { PaginationLinks } from "@/components/common";
-import { ARTICLES_PER_PAGE } from "@/lib/constants";
-import { SITE_NAME } from "@/lib/constants";
+import { ARTICLES_PER_PAGE, SITE_NAME, SITE_URL, ARTICLES_LIST_DESCRIPTION, BLOG_DESCRIPTION_SUFFIX } from "@/lib/constants";
 import type { Article } from "@/lib/types";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: `Articles | ${SITE_NAME}`,
-  description: `${SITE_NAME}ブログの記事一覧をご覧ください`,
+  description: ARTICLES_LIST_DESCRIPTION,
+  openGraph: {
+    title: `Articles | ${SITE_NAME}`,
+    description: `${SITE_NAME}${BLOG_DESCRIPTION_SUFFIX}`,
+    type: "website",
+    url: `${SITE_URL}/articles`,
+    siteName: SITE_NAME,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Articles | ${SITE_NAME}`,
+    description: `${SITE_NAME}${BLOG_DESCRIPTION_SUFFIX}`,
+  },
+  alternates: {
+    canonical: `${SITE_URL}/articles`,
+  },
 };
 
 export default async function ArticlesPage() {
