@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "npm run generate:types && next build",
     "build:clean": "npm run clean && npm run build",
+    "build:ci": "npm run clean && next build",
     "clean": "rm -rf .next out",
     "start": "serve out",
     "lint": "next lint",
