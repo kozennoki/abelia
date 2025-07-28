@@ -63,6 +63,7 @@ jobs:
         env:
           NODE_ENV: production
           NEXT_PUBLIC_API_URL: http://localhost:8080/api/v1
+          NEXT_PUBLIC_API_KEY: ${{ secrets.NERINE_API_KEY }}
           NEXT_PUBLIC_SITE_URL: ${{ env.SITE_URL }}
 
       - name: Deploy to S3
