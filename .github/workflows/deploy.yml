@@ -58,6 +58,22 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Test API endpoints
+        run: |
+          echo "🔍 Testing actual API endpoints..."
+
+          # ヘルスチェック（既に成功しているはず）
+          curl -s http://localhost:8080/health && echo "✅ Health OK" || echo "❌ Health failed"
+
+          # Articles endpoint (認証付き)
+          curl -s -H "X-API-Key: ${{ secrets.NERINE_API_KEY }}" \
+              http://localhost:8080/api/v1/articles && echo "✅ Articles OK" || echo "❌ Articles failed"
+
+          # MicroCMS接続確認
+          echo "🔍 Environment check:"
+          echo "MICROCMS_SERVICE_ID is set: ${{ secrets.MICROCMS_SERVICE_ID != '' }}"
+          echo "MICROCMS_API_KEY is set: ${{ secrets.MICROCMS_API_KEY != '' }}"
+
       - name: Build Abelia
         run: npm run build:ci
         env:
