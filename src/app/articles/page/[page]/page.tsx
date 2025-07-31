@@ -23,10 +23,8 @@ export async function generateStaticParams() {
     }));
   } catch {
     console.log('API not available, using minimal pages for build');
-    return [
-      { page: '2' },
-      { page: '3' },
-    ];
+    // Return empty array to prevent generation of any static pages when API is unavailable
+    return [];
   }
 }
 
@@ -84,7 +82,8 @@ export default async function ArticlesPagedPage({ params }: PageProps) {
 
     // Page number exceeds total pages
     if (pageNumber > totalPages && totalPages > 0) {
-      notFound();
+      error = 'ページが見つかりません。';
+      return;
     }
   } catch (err) {
     console.error('Failed to fetch articles:', err);
