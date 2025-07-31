@@ -58,53 +58,37 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Test API endpoints
-        run: |
-          echo "🔍 Testing actual API endpoints..."
-
-          # ヘルスチェック（既に成功しているはず）
-          curl -s http://localhost:8080/health && echo "✅ Health OK" || echo "❌ Health failed"
-
-          # Articles endpoint (認証付き)
-          curl -s -H "X-API-Key: ${{ secrets.NERINE_API_KEY }}" \
-              http://localhost:8080/api/v1/articles && echo "✅ Articles OK" || echo "❌ Articles failed"
-
-          # MicroCMS接続確認
-          echo "🔍 Environment check:"
-          echo "MICROCMS_SERVICE_ID is set: ${{ secrets.MICROCMS_SERVICE_ID != '' }}"
-          echo "MICROCMS_API_KEY is set: ${{ secrets.MICROCMS_API_KEY != '' }}"
-
       - name: Build Abelia
         run: npm run build:ci
         env:
-          NODE_ENV: production
-          NEXT_PUBLIC_API_URL: http://localhost:8080/api/v1
+          # NODE_ENV: production
+          NEXT_PUBLIC_API_URL: http://localhost:8080
           NEXT_PUBLIC_API_KEY: ${{ secrets.NERINE_API_KEY }}
-          NEXT_PUBLIC_SITE_URL: ${{ env.SITE_URL }}
+          # NEXT_PUBLIC_SITE_URL: ${{ env.SITE_URL }}
 
-      - name: Deploy to S3
-        run: |
-          # 静的アセット（長期キャッシュ）
-          aws s3 sync out/ s3://${{ secrets.S3_BUCKET }}/ \
-            --delete \
-            --cache-control "public,max-age=31536000,immutable" \
-            --exclude "*.html" \
-            --exclude "sitemap.xml" \
-            --exclude "robots.txt"
+      # - name: Deploy to S3
+      #   run: |
+      #     # 静的アセット（長期キャッシュ）
+      #     aws s3 sync out/ s3://${{ secrets.S3_BUCKET }}/ \
+      #       --delete \
+      #       --cache-control "public,max-age=31536000,immutable" \
+      #       --exclude "*.html" \
+      #       --exclude "sitemap.xml" \
+      #       --exclude "robots.txt"
 
-          # HTMLファイル（短期キャッシュ）
-          aws s3 sync out/ s3://${{ secrets.S3_BUCKET }}/ \
-            --cache-control "public,max-age=3600,must-revalidate" \
-            --exclude "*" \
-            --include "*.html" \
-            --include "sitemap.xml" \
-            --include "robots.txt"
+      #     # HTMLファイル（短期キャッシュ）
+      #     aws s3 sync out/ s3://${{ secrets.S3_BUCKET }}/ \
+      #       --cache-control "public,max-age=3600,must-revalidate" \
+      #       --exclude "*" \
+      #       --include "*.html" \
+      #       --include "sitemap.xml" \
+      #       --include "robots.txt"
 
-      - name: Invalidate CloudFront
-        run: |
-          aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
-            --paths "/*"
+      # - name: Invalidate CloudFront
+      #   run: |
+      #     aws cloudfront create-invalidation \
+      #       --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+      #       --paths "/*"
 
       - name: Show Nerine API logs on failure
         if: failure()
