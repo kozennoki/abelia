@@ -64,7 +64,6 @@ jobs:
           NEXT_PUBLIC_API_URL: http://localhost:8080
           NEXT_PUBLIC_API_KEY: ${{ secrets.NERINE_API_KEY }}
           NEXT_PUBLIC_GA_ID: ${{ secrets.GA_ID }}
-          NEXT_PUBLIC_USE_MOCK: true
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -72,29 +71,23 @@ jobs:
           name: build-output
           path: out/
 
-      # - name: Deploy to S3
-      #   run: |
-      #     # 静的アセット（長期キャッシュ）
-      #     aws s3 sync out/ s3://${{ secrets.S3_BUCKET }}/ \
-      #       --delete \
-      #       --cache-control "public,max-age=31536000,immutable" \
-      #       --exclude "*.html" \
-      #       --exclude "sitemap.xml" \
-      #       --exclude "robots.txt"
+      - name: Deploy to S3
+        run: |
+          # 静的アセット（長期キャッシュ）
+          aws s3 sync out/ s3://${{ secrets.S3_BUCKET }}/ \
+            --delete \
+            --cache-control "public,max-age=31536000,immutable" \
+            --exclude "*.html" \
+            --exclude "sitemap.xml" \
+            --exclude "robots.txt"
 
-      #     # HTMLファイル（短期キャッシュ）
-      #     aws s3 sync out/ s3://${{ secrets.S3_BUCKET }}/ \
-      #       --cache-control "public,max-age=3600,must-revalidate" \
-      #       --exclude "*" \
-      #       --include "*.html" \
-      #       --include "sitemap.xml" \
-      #       --include "robots.txt"
-
-      # - name: Invalidate CloudFront
-      #   run: |
-      #     aws cloudfront create-invalidation \
-      #       --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
-      #       --paths "/*"
+          # HTMLファイル（短期キャッシュ）
+          aws s3 sync out/ s3://${{ secrets.S3_BUCKET }}/ \
+            --cache-control "public,max-age=3600,must-revalidate" \
+            --exclude "*" \
+            --include "*.html" \
+            --include "sitemap.xml" \
+            --include "robots.txt"
 
       - name: Show Nerine API logs on failure
         if: failure()
