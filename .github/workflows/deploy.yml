@@ -70,6 +70,7 @@ jobs:
         with:
           name: build-output
           path: out/
+          retention-days: 7
 
       - name: Deploy to S3
         run: |
