@@ -18,7 +18,7 @@ export const ARTICLE_IMAGE_PLACEHOLDER = 'data:image/svg+xml;base64,PHN2ZyB3aWR0
 
 // Site metadata
 export const SITE_NAME = '浩然之気';
-export const SITE_DESCRIPTION = '然のブログです。';
+export const SITE_DESCRIPTION = 'webエンジニア然の「浩然之気」を養う日々の記録。趣味、日常、仕事。何事に対しても緩く、それでいて少しストイックに生きる過程を綴ります。';
 export const SITE_URL = 'https://kozennoki.com';
 
 // Author information
