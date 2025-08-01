@@ -74,7 +74,20 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          aws s3 sync out/ s3://${{ secrets.S3_BUCKET }}/ --delete
+          # すべてのファイルを同期（削除あり）
+          aws s3 sync out/ s3://${{ secrets.S3_BUCKET }}/ \
+            --delete \
+            --cache-control "public,max-age=31536000,immutable"
+
+          # 短期間用のキャッシュを上書き
+          aws s3 cp s3://${{ secrets.S3_BUCKET }}/ s3://${{ secrets.S3_BUCKET }}/ \
+            --recursive \
+            --exclude "*" \
+            --include "*.html" \
+            --include "sitemap.xml" \
+            --include "robots.txt" \
+            --cache-control "public,max-age=3600,must-revalidate" \
+            --metadata-directive REPLACE
 
       - name: Show Nerine API logs on failure
         if: failure()
