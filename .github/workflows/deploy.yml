@@ -64,6 +64,7 @@ jobs:
           NEXT_PUBLIC_API_URL: http://localhost:8080
           NEXT_PUBLIC_API_KEY: ${{ secrets.NERINE_API_KEY }}
           NEXT_PUBLIC_GA_ID: ${{ secrets.GA_ID }}
+          NEXT_PUBLIC_GSC_VERIFICATION_CODE: ${{ secrets.GSC_VERIFICATION_CODE }}
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2

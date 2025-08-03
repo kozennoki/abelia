@@ -28,6 +28,9 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   authors: [{ name: AUTHOR_NAME }],
   creator: AUTHOR_NAME,
+  verification: env.NEXT_PUBLIC_GSC_VERIFICATION_CODE
+    ? { google: env.NEXT_PUBLIC_GSC_VERIFICATION_CODE }
+    : undefined,
   openGraph: {
     type: "website",
     locale: "ja_JP",

@@ -4,6 +4,7 @@ export const env = {
   NEXT_PUBLIC_API_KEY: process.env.NEXT_PUBLIC_API_KEY || '',
   NEXT_PUBLIC_USE_MOCK: process.env.NEXT_PUBLIC_USE_MOCK === 'true',
   NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID || '',
+  NEXT_PUBLIC_GSC_VERIFICATION_CODE: process.env.NEXT_PUBLIC_GSC_VERIFICATION_CODE || '',
 } as const;
 
 // Validation function to ensure required environment variables are set
@@ -23,4 +24,5 @@ export interface ProcessEnv {
   NEXT_PUBLIC_API_KEY: string;
   NEXT_PUBLIC_USE_MOCK: string;
   NEXT_PUBLIC_GA_ID: string;
+  NEXT_PUBLIC_GSC_VERIFICATION_CODE: string;
 }
