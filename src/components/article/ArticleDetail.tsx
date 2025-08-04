@@ -4,8 +4,11 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import type { ArticleDetailProps } from "@/lib/types";
 import { formatDate } from "@/lib/utils";
+import { CodeBlock } from "./CodeBlock";
 
 export default function ArticleDetail({ article }: ArticleDetailProps) {
   return (
@@ -20,11 +23,11 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
             {article.Category.Name}
           </Link>
         </div>
-        
+
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
           {article.Title}
         </h1>
-        
+
         <div className="flex items-center gap-4 text-sm text-gray-600 mb-6">
           <time dateTime={article.CreatedAt}>
             {formatDate(article.CreatedAt)}
@@ -35,7 +38,7 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
             </span>
           )}
         </div>
-        
+
         <p className="text-lg text-gray-700 leading-relaxed">
           {article.Description}
         </p>
@@ -57,44 +60,24 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
       )}
 
       {/* Article Content */}
-      <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed">
+      <div className="prose prose-lg prose-slate max-w-none">
         <ReactMarkdown
-          rehypePlugins={[rehypeRaw, rehypeHighlight]}
+          rehypePlugins={[
+            rehypeRaw,
+            rehypeHighlight,
+            rehypeSlug,
+            [rehypeAutolinkHeadings, {
+              behavior: 'wrap',
+              properties: {
+                className: ['anchor-link'],
+                ariaLabel: 'Link to section'
+              }
+            }]
+          ]}
           components={{
-            h1: ({ children }) => (
-              <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">{children}</h2>
-            ),
-            h2: ({ children }) => (
-              <h3 className="text-xl font-bold text-gray-900 mt-6 mb-3">{children}</h3>
-            ),
-            h3: ({ children }) => (
-              <h4 className="text-lg font-semibold text-gray-900 mt-4 mb-2">{children}</h4>
-            ),
-            p: ({ children }) => (
-              <p className="mb-4 leading-relaxed">{children}</p>
-            ),
-            code: ({ children, ...props }) => (
-              <code className="bg-gray-100 px-2 py-1 rounded text-sm font-mono" {...props}>
-                {children}
-              </code>
-            ),
-            pre: ({ children }) => (
-              <pre className="bg-gray-100 rounded-lg p-4 overflow-x-auto my-4">{children}</pre>
-            ),
-            ul: ({ children }) => (
-              <ul className="mb-4 ml-6 list-disc">{children}</ul>
-            ),
-            ol: ({ children }) => (
-              <ol className="mb-4 ml-6 list-decimal">{children}</ol>
-            ),
-            li: ({ children }) => (
-              <li className="mb-1">{children}</li>
-            ),
-            blockquote: ({ children }) => (
-              <blockquote className="border-l-4 border-gray-300 pl-4 py-2 my-4 italic text-gray-700">
-                {children}
-              </blockquote>
-            ),
+            pre: ({ children, ...props }) => {
+              return <CodeBlock {...props}>{children}</CodeBlock>;
+            }
           }}
         >
           {article.Body}
@@ -113,7 +96,7 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
               {article.Category.Name}
             </Link>
           </div>
-          
+
           <Link
             href="/"
             className="inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
@@ -128,4 +111,3 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
     </article>
   );
 }
-

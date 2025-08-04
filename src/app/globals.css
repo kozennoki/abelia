@@ -24,14 +24,14 @@ body {
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  
+
   .line-clamp-3 {
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -42,11 +42,11 @@ body {
   .text-shadow-lg {
     text-shadow: 0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
+
   .drop-shadow-3xl {
     filter: drop-shadow(0 35px 70px rgba(0, 0, 0, 0.25));
   }
-  
+
   .bg-gradient-radial {
     background: radial-gradient(circle, transparent 0%, rgba(0, 0, 0, 0.5) 100%);
   }
@@ -88,4 +88,192 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+/* Syntax Highlighting */
+.hljs {
+  background: #2d3748 !important;
+  color: #e2e8f0 !important;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in,
+.hljs-name {
+  color: #81c784 !important;
+}
+
+.hljs-string,
+.hljs-attr {
+  color: #ffb74d !important;
+}
+
+.hljs-number,
+.hljs-literal {
+  color: #f48fb1 !important;
+}
+
+.hljs-comment {
+  color: #90a4ae !important;
+  font-style: italic;
+}
+
+.hljs-function,
+.hljs-title {
+  color: #64b5f6 !important;
+}
+
+.hljs-variable,
+.hljs-template-variable {
+  color: #e57373 !important;
+}
+
+/* Typography Plugin カスタマイズ */
+.prose {
+  max-width: none;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  color: #1a202c !important;
+  font-weight: 700;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.prose h2 {
+  font-size: 2rem;
+  border-bottom: 2px solid #1e646e;
+  padding-bottom: 0.5rem;
+}
+
+.prose h3 {
+  font-size: 1.5rem;
+}
+
+.prose blockquote {
+  border-left: 4px solid #1e646e;
+  background: #f7fafc;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #4a5568;
+}
+
+.prose pre {
+  background: #2d3748 !important;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  position: relative;
+}
+
+.prose code {
+  background: #edf2f7;
+  color: #e53e3e;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.prose pre code {
+  background: transparent;
+  color: #e2e8f0;
+  padding: 0;
+  font-weight: normal;
+}
+
+.prose table {
+  border-collapse: collapse;
+  margin: 2rem 0;
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid #e2e8f0;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.prose th {
+  background: #1e646e;
+  color: white;
+  font-weight: 600;
+}
+
+.prose tbody tr:nth-child(even) {
+  background: #f7fafc;
+}
+
+.prose img {
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+}
+
+.prose a {
+  color: #1e646e;
+  text-decoration: none;
+}
+
+.prose ul,
+.prose ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+.prose li {
+  margin: 0.5rem 0;
+}
+
+.prose ul > li::marker {
+  color: #1e646e;
+}
+
+.prose ol > li::marker {
+  color: #1e646e;
+  font-weight: 600;
+}
+
+/* Anchor Links */
+.anchor-link {
+  position: relative;
+  scroll-margin-top: 2rem;
+  color: #4b5563 !important;
+  text-decoration: none !important;
+}
+
+/* .anchor-link:hover {
+  color: #1a202c !important;
+} */
+
+/* Code Block Improvements */
+.prose pre {
+  position: relative;
+}
+
+.prose pre .copy-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.prose pre:hover .copy-button {
+  opacity: 1;
 }
