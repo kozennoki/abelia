@@ -98,7 +98,7 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
           </div>
 
           <Link
-            href="/"
+            href="/articles"
             className="inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
           >
             <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
