@@ -80,7 +80,7 @@ export default async function HomePage() {
 
         {/* Zenn記事一覧へのリンク */}
         <div className="flex justify-center mt-8">
-          <Button href="/categories/zenn">VIEW MORE</Button>
+          <Button href="/categories/zenn">View More</Button>
         </div>
       </div>
     </div>
