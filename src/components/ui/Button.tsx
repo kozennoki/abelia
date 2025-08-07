@@ -12,7 +12,7 @@ export default function Button({
   children, 
   className = '' 
 }: ButtonProps) {
-  const baseClasses = "bg-primary hover:bg-white text-white hover:text-primary font-medium py-4 px-12 rounded-lg transition-colors duration-500 w-full max-w-xs text-center border border-primary";
+  const baseClasses = "bg-primary hover:bg-background text-white hover:text-primary font-medium py-4 px-12 rounded-lg transition-colors duration-500 w-full max-w-xs text-center border border-primary";
   
   const combinedClasses = `${baseClasses} ${className}`.trim();
   

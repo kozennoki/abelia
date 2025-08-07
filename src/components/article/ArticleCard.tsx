@@ -20,7 +20,7 @@ export default function ArticleCard({
   return (
     <article
       className={cn(
-        "bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow relative group cursor-pointer",
+        "bg-background rounded-lg border border-border overflow-hidden hover:shadow-md transition-shadow relative group cursor-pointer",
         isCompact ? "flex" : "block"
       )}
     >
@@ -65,14 +65,14 @@ export default function ArticleCard({
           >
             {article.Category.Name}
           </Link>
-          <time className="text-xs text-gray-500">
+          <time className="text-xs text-muted">
             {formatDate(article.CreatedAt)}
           </time>
         </div>
 
         <h2
           className={cn(
-            "font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-2",
+            "font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2",
             isCompact ? "text-sm mb-1" : "text-lg mb-2",
             isZennArticle ? "flex items-center gap-2" : ""
           )}
@@ -86,7 +86,7 @@ export default function ArticleCard({
         </h2>
 
         {!isCompact && !isZennArticle && (
-          <p className="text-sm text-gray-600 line-clamp-3 mb-2">
+          <p className="text-sm text-muted-foreground line-clamp-3 mb-2">
             {truncateText(article.Description, ARTICLE_DESCRIPTION_MAX_LENGTH)}
           </p>
         )}

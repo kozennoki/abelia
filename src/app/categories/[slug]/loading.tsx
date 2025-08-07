@@ -3,8 +3,8 @@ export default function CategoryLoading() {
     <div className="container mx-auto px-4 py-8">
       {/* カテゴリヘッダー スケルトン */}
       <div className="mb-8">
-        <div className="h-8 bg-gray-200 rounded w-48 mb-2 animate-pulse"></div>
-        <div className="h-4 bg-gray-200 rounded w-64 animate-pulse"></div>
+        <div className="h-8 bg-border rounded w-48 mb-2 animate-pulse"></div>
+        <div className="h-4 bg-border rounded w-64 animate-pulse"></div>
       </div>
 
       {/* 記事一覧 スケルトン */}
@@ -14,12 +14,12 @@ export default function CategoryLoading() {
             key={index}
             className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse"
           >
-            <div className="h-48 bg-gray-200"></div>
+            <div className="h-48 bg-border"></div>
             <div className="p-6">
-              <div className="h-4 bg-gray-200 rounded w-20 mb-3"></div>
-              <div className="h-6 bg-gray-200 rounded w-full mb-2"></div>
-              <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
-              <div className="h-4 bg-gray-200 rounded w-24"></div>
+              <div className="h-4 bg-border rounded w-20 mb-3"></div>
+              <div className="h-6 bg-border rounded w-full mb-2"></div>
+              <div className="h-4 bg-border rounded w-3/4 mb-4"></div>
+              <div className="h-4 bg-border rounded w-24"></div>
             </div>
           </div>
         ))}

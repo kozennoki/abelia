@@ -65,13 +65,13 @@ export default function PaginationLinks({ currentPage, totalPages, baseUrl = "/a
       {currentPage > 1 ? (
         <Link
           href={getPageUrl(currentPage - 1)}
-          className="px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:text-gray-900"
+          className="px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors bg-background text-muted-foreground border border-border hover:bg-muted-background hover:text-foreground"
         >
           <span className="hidden sm:inline">前へ</span>
           <span className="sm:hidden">‹</span>
         </Link>
       ) : (
-        <span className="px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium bg-gray-100 text-gray-400 cursor-not-allowed">
+        <span className="px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium bg-muted-background text-muted cursor-not-allowed">
           <span className="hidden sm:inline">前へ</span>
           <span className="sm:hidden">‹</span>
         </span>
@@ -86,13 +86,13 @@ export default function PaginationLinks({ currentPage, totalPages, baseUrl = "/a
               className={`px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors min-w-[32px] sm:min-w-[36px] inline-block text-center ${
                 currentPage === page
                   ? 'bg-primary text-white'
-                  : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:text-gray-900'
+                  : 'bg-background text-muted-foreground border border-border hover:bg-muted-background hover:text-foreground'
               }`}
             >
               {page}
             </Link>
           ) : (
-            <span className="px-1 sm:px-3 py-2 text-gray-500 text-xs sm:text-sm">
+            <span className="px-1 sm:px-3 py-2 text-muted text-xs sm:text-sm">
               {page}
             </span>
           )}
@@ -103,13 +103,13 @@ export default function PaginationLinks({ currentPage, totalPages, baseUrl = "/a
       {currentPage < totalPages ? (
         <Link
           href={getPageUrl(currentPage + 1)}
-          className="px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:text-gray-900"
+          className="px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors bg-background text-muted-foreground border border-border hover:bg-muted-background hover:text-foreground"
         >
           <span className="hidden sm:inline">次へ</span>
           <span className="sm:hidden">›</span>
         </Link>
       ) : (
-        <span className="px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium bg-gray-100 text-gray-400 cursor-not-allowed">
+        <span className="px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium bg-muted-background text-muted cursor-not-allowed">
           <span className="hidden sm:inline">次へ</span>
           <span className="sm:hidden">›</span>
         </span>

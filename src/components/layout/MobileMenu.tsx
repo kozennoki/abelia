@@ -16,7 +16,7 @@ export function MobileMenu({ categories }: MobileMenuProps) {
     <div className="md:hidden flex items-center h-16">
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="text-gray-600 focus:outline-none focus:text-gray-900 relative p-2"
+        className="text-muted-foreground focus:outline-none focus:text-foreground relative p-2"
       >
         <div className="relative w-6 h-6">
           {/* Hamburger lines */}
@@ -44,7 +44,7 @@ export function MobileMenu({ categories }: MobileMenuProps) {
 
       {/* Mobile menu panel */}
       <div
-        className={`absolute top-full left-0 right-0 md:hidden border-t border-gray-200 bg-white shadow-lg z-50 overflow-hidden transition-all duration-300 ease-in-out ${
+        className={`absolute top-full left-0 right-0 md:hidden border-t border-border bg-background shadow-lg z-50 overflow-hidden transition-all duration-300 ease-in-out ${
           isMobileMenuOpen
             ? 'max-h-96 opacity-100 translate-y-0'
             : 'max-h-0 opacity-0 -translate-y-2'
@@ -53,7 +53,7 @@ export function MobileMenu({ categories }: MobileMenuProps) {
         <div className="px-2 pt-2 pb-3 space-y-1">
           <Link
             href="/"
-            className="block px-3 py-2 font-medium text-gray-600 active:text-gray-900 active:bg-gray-50 rounded-md transition-colors duration-200"
+            className="block px-3 py-2 font-medium text-muted-foreground active:text-foreground active:bg-muted-background rounded-md transition-colors duration-200"
             onClick={() => setIsMobileMenuOpen(false)}
             style={{
               animation: isMobileMenuOpen
@@ -67,7 +67,7 @@ export function MobileMenu({ categories }: MobileMenuProps) {
 
           <Link
             href="/articles"
-            className="block px-3 py-2 font-medium text-gray-600 active:text-gray-900 active:bg-gray-50 rounded-md transition-colors duration-200"
+            className="block px-3 py-2 font-medium text-muted-foreground active:text-foreground active:bg-muted-background rounded-md transition-colors duration-200"
             onClick={() => setIsMobileMenuOpen(false)}
             style={{
               animation: isMobileMenuOpen
@@ -97,7 +97,7 @@ export function MobileMenu({ categories }: MobileMenuProps) {
                 <Link
                   key={category.Slug}
                   href={`/categories/${category.Slug}`}
-                  className="block px-3 py-1 text-gray-600 active:text-gray-900 active:bg-gray-50 rounded transition-colors duration-200"
+                  className="block px-3 py-1 text-muted-foreground active:text-foreground active:bg-muted-background rounded transition-colors duration-200"
                   onClick={() => setIsMobileMenuOpen(false)}
                   style={{
                     animation: isMobileMenuOpen

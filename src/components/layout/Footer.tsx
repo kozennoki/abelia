@@ -6,10 +6,10 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="border-t border-gray-200 bg-gray-50">
+    <footer className="border-t border-border bg-muted-background">
       <div className="container mx-auto px-4 py-8">
         <div className="text-center">
-          <p className="text-gray-600 text-sm">
+          <p className="text-muted-foreground text-sm">
             © {currentYear} {SITE_NAME}. All rights reserved.
           </p>
         </div>

@@ -94,10 +94,10 @@ export default async function ArticlesPagedPage({ params }: PageProps) {
     return (
       <div className="container mx-auto px-4 py-16">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-foreground mb-4">
             エラーが発生しました
           </h1>
-          <p className="text-lg text-gray-600 mb-8">
+          <p className="text-lg text-muted-foreground mb-8">
             {error}
           </p>
         </div>
@@ -108,7 +108,7 @@ export default async function ArticlesPagedPage({ params }: PageProps) {
   return (
     <div className="container mx-auto px-4 md:py-20 py-6">
       <div className="mb-2 flex flex-row items-center">
-        <h1 className="text-3xl font-bold text-gray-900 pr-4">
+        <h1 className="text-3xl font-bold text-foreground pr-4">
           Recent
         </h1>
         <div className="font-light">- 最新記事 Page.{pageNumber} -</div>

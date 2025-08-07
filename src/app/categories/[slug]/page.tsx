@@ -129,10 +129,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     return (
       <div className="container mx-auto px-4 py-16">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-foreground mb-4">
             エラーが発生しました
           </h1>
-          <p className="text-lg text-gray-600 mb-8">{error}</p>
+          <p className="text-lg text-muted-foreground mb-8">{error}</p>
         </div>
       </div>
     );
@@ -146,7 +146,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     <div className="container mx-auto px-4 md:py-20 py-6">
       {/* カテゴリヘッダー */}
       <div className="mb-2 flex flex-row items-center">
-        <h1 className="text-3xl font-bold text-gray-900 pr-4">
+        <h1 className="text-3xl font-bold text-foreground pr-4">
           {capitalizeFirst(category.Slug)}
         </h1>
         <div className="font-light">- {category.Name} -</div>
@@ -159,7 +159,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         <ArticleList articles={articles} />
       ) : (
         <div className="text-center py-12">
-          <p className="text-gray-500 text-lg">
+          <p className="text-muted text-lg">
             このカテゴリにはまだ記事がありません。
           </p>
         </div>

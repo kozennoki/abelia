@@ -34,10 +34,10 @@ export default async function HomePage() {
     return (
       <div className="container mx-auto px-4 py-16">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-foreground mb-4">
             エラーが発生しました
           </h1>
-          <p className="text-lg text-gray-600 mb-8">{error}</p>
+          <p className="text-lg text-muted-foreground mb-8">{error}</p>
         </div>
       </div>
     );
@@ -54,7 +54,7 @@ export default async function HomePage() {
       <div className="container mx-auto px-4 py-16" data-section="latest">
         {/* 最新記事セクション */}
         <div className="mb-2 flex flex-row items-center">
-          <h2 className="text-3xl font-bold text-gray-900 mr-4">Recent</h2>
+          <h2 className="text-3xl font-bold text-foreground mr-4">Recent</h2>
           <div className="font-light">- 最新記事 -</div>
         </div>
 
@@ -68,13 +68,13 @@ export default async function HomePage() {
         </div>
 
         {/* Zenn記事セクション */}
-        <div className="mt-16 border-t border-gray-200 pt-16">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Zenn</h2>
+        <div className="mt-16 border-t border-border pt-16">
+          <h2 className="text-2xl font-bold text-foreground mb-2">Zenn</h2>
           <div className="border border-secondary mb-8"></div>
           {zennArticles.length > 0 ? (
             <ArticleList articles={zennArticles} />
           ) : (
-            <p className="text-gray-500 py-4">Zenn記事がありません。</p>
+            <p className="text-muted py-4">Zenn記事がありません。</p>
           )}
         </div>
 

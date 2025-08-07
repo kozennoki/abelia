@@ -15,11 +15,11 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
   }, [error]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8 text-center">
+    <div className="min-h-screen flex items-center justify-center bg-muted-background">
+      <div className="max-w-md w-full bg-background rounded-lg shadow-md p-8 text-center">
         <div className="mb-6">
           <svg
-            className="mx-auto h-16 w-16 text-red-500"
+            className="mx-auto h-16 w-16 text-error"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -33,11 +33,11 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
           </svg>
         </div>
         
-        <h1 className="text-2xl font-bold text-gray-900 mb-4">
+        <h1 className="text-2xl font-bold text-foreground mb-4">
           エラーが発生しました
         </h1>
         
-        <p className="text-gray-600 mb-6">
+        <p className="text-muted-foreground mb-6">
           申し訳ございません。予期しないエラーが発生しました。
           <br />
           しばらくしてからもう一度お試しください。
@@ -46,14 +46,14 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
         <div className="space-y-3">
           <button
             onClick={reset}
-            className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-primary/90 transition-colors font-medium"
+            className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-accent transition-colors font-medium"
           >
             もう一度試す
           </button>
           
           <Link
             href="/"
-            className="block w-full bg-gray-100 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-200 transition-colors font-medium"
+            className="block w-full bg-muted-background text-muted-foreground py-2 px-4 rounded-md hover:bg-border transition-colors font-medium"
           >
             ホームに戻る
           </Link>
@@ -61,10 +61,10 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
         
         {process.env.NODE_ENV === 'development' && (
           <details className="mt-6 text-left">
-            <summary className="text-sm text-gray-500 cursor-pointer hover:text-gray-700">
+            <summary className="text-sm text-muted cursor-pointer hover:text-muted-foreground">
               開発者向け情報 (クリックで表示)
             </summary>
-            <pre className="mt-2 text-xs text-red-600 bg-red-50 p-3 rounded overflow-auto">
+            <pre className="mt-2 text-xs text-error bg-error/5 p-3 rounded overflow-auto">
               {error.message}
               {error.stack && (
                 <>

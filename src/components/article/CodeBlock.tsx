@@ -39,7 +39,7 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
         {children}
         <button
           onClick={handleCopy}
-          className="copy-button absolute top-2 right-2 bg-gray-700 hover:bg-gray-600 text-white text-xs px-2 py-1 rounded transition-all duration-200"
+          className="copy-button absolute top-2 right-2 bg-foreground hover:bg-accent text-white text-xs px-2 py-1 rounded transition-all duration-200"
           aria-label="Copy code"
           title={copied ? "Copied!" : "Copy code"}
         >

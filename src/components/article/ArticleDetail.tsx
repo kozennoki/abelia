@@ -24,11 +24,11 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
           </Link>
         </div>
 
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+        <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">
           {article.Title}
         </h1>
 
-        <div className="flex items-center gap-4 text-sm text-gray-600 mb-6">
+        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
           <time dateTime={article.CreatedAt}>
             {formatDate(article.CreatedAt)}
           </time>
@@ -39,7 +39,7 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
           )}
         </div>
 
-        <p className="text-lg text-gray-700 leading-relaxed">
+        <p className="text-lg text-muted-foreground leading-relaxed">
           {article.Description}
         </p>
       </header>
@@ -85,13 +85,13 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
       </div>
 
       {/* Article Footer */}
-      <footer className="mt-12 pt-8 border-t border-gray-200">
+      <footer className="mt-12 pt-8 border-t border-border">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-500">カテゴリ:</span>
+            <span className="text-sm text-muted">カテゴリ:</span>
             <Link
               href={`/categories/${article.Category.Slug}`}
-              className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+              className="text-sm font-medium text-primary hover:text-accent transition-colors"
             >
               {article.Category.Name}
             </Link>
@@ -99,7 +99,7 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
 
           <Link
             href="/articles"
-            className="inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+            className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
             <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />

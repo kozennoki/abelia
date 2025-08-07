@@ -56,8 +56,8 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         disabled={currentPage === 1}
         className={`px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors ${
           currentPage === 1
-            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-            : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:text-gray-900'
+            ? 'bg-muted-background text-muted cursor-not-allowed'
+            : 'bg-background text-muted-foreground border border-border hover:bg-muted-background hover:text-foreground'
         }`}
       >
         <span className="hidden sm:inline">前へ</span>
@@ -73,13 +73,13 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
               className={`px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors min-w-[32px] sm:min-w-[36px] ${
                 currentPage === page
                   ? 'bg-primary text-white'
-                  : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:text-gray-900'
+                  : 'bg-background text-muted-foreground border border-border hover:bg-muted-background hover:text-foreground'
               }`}
             >
               {page}
             </button>
           ) : (
-            <span className="px-1 sm:px-3 py-2 text-gray-500 text-xs sm:text-sm">
+            <span className="px-1 sm:px-3 py-2 text-muted text-xs sm:text-sm">
               {page}
             </span>
           )}
@@ -92,8 +92,8 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         disabled={currentPage === totalPages}
         className={`px-2 sm:px-3 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors ${
           currentPage === totalPages
-            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-            : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:text-gray-900'
+            ? 'bg-muted-background text-muted cursor-not-allowed'
+            : 'bg-background text-muted-foreground border border-border hover:bg-muted-background hover:text-foreground'
         }`}
       >
         <span className="hidden sm:inline">次へ</span>

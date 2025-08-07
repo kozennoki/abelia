@@ -17,10 +17,10 @@ export default function Error({
   return (
     <div className="container mx-auto px-4 py-16">
       <div className="text-center">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <h1 className="text-4xl font-bold text-foreground mb-4">
           エラーが発生しました
         </h1>
-        <p className="text-lg text-gray-600 mb-8">
+        <p className="text-lg text-muted-foreground mb-8">
           カテゴリページの読み込み中にエラーが発生しました。
         </p>
         
@@ -34,7 +34,7 @@ export default function Error({
           
           <Link
             href="/"
-            className="inline-block bg-gray-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-300 transition-colors"
+            className="inline-block bg-border text-foreground px-6 py-3 rounded-lg hover:bg-border transition-colors"
           >
             ホームに戻る
           </Link>
