@@ -65,7 +65,7 @@ export default function ArticleCard({
             {article.Category.Name}
           </Link>
           <time className="text-xs text-muted">
-            {formatDate(article.CreatedAt)}
+            {formatDate(article.PublishedAt)}
           </time>
         </div>
 
