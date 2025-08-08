@@ -32,6 +32,7 @@ Next.js 14では、App Routerが安定版となり、多くの新機能が追加
 ## 従来のPages Routerとの違い
 
 App Routerでは、ファイルベースのルーティングがより柔軟になり、レイアウトの共有が簡単になりました。`,
+    PublishedAt: '2024-01-15T10:00:00Z',
     CreatedAt: '2024-01-15T10:00:00Z',
     UpdatedAt: '2024-01-15T10:00:00Z',
   },
@@ -60,6 +61,7 @@ interface User {
   email: string;
 }
 \`\`\``,
+    PublishedAt: '2024-01-14T14:30:00Z',
     CreatedAt: '2024-01-14T14:30:00Z',
     UpdatedAt: '2024-01-14T14:30:00Z',
   },
@@ -87,6 +89,7 @@ Tailwind CSSを使って効率的にスタイリングを行う方法を説明�
   <p class="text-gray-600">説明文</p>
 </div>
 \`\`\``,
+    PublishedAt: '2024-01-13T09:15:00Z',
     CreatedAt: '2024-01-13T09:15:00Z',
     UpdatedAt: '2024-01-13T09:15:00Z',
   },
@@ -111,6 +114,7 @@ Tailwind CSSを使って効率的にスタイリングを行う方法を説明�
 - ポモドーロテクニック
 - タスクの優先順位付け
 - 定期的な休憩`,
+    PublishedAt: '2024-01-12T16:45:00Z',
     CreatedAt: '2024-01-12T16:45:00Z',
     UpdatedAt: '2024-01-12T16:45:00Z',
   },
@@ -135,6 +139,7 @@ Tailwind CSSを使って効率的にスタイリングを行う方法を説明�
 - MVP（最小実行可能製品）の構築
 - ユーザーフィードバックの収集
 - 継続的な改善`,
+    PublishedAt: '2024-01-11T11:20:00Z',
     CreatedAt: '2024-01-11T11:20:00Z',
     UpdatedAt: '2024-01-11T11:20:00Z',
   },
@@ -166,6 +171,7 @@ function useCounter(initialValue = 0) {
   return { count, increment, decrement };
 }
 \`\`\``,
+    PublishedAt: '2024-01-10T13:30:00Z',
     CreatedAt: '2024-01-10T13:30:00Z',
     UpdatedAt: '2024-01-10T13:30:00Z',
   },
@@ -201,6 +207,7 @@ services:
     environment:
       POSTGRES_DB: myapp
 \`\`\``,
+    PublishedAt: '2024-01-09T08:45:00Z',
     CreatedAt: '2024-01-09T08:45:00Z',
     UpdatedAt: '2024-01-09T08:45:00Z',
   },
@@ -229,6 +236,7 @@ GraphQLとREST APIの特徴を比較し、適切な選択方法を解説しま�
 ## 選択の指針
 
 プロジェクトの要件や チーム のスキルセットに応じて最適な選択を行いましょう。`,
+    PublishedAt: '2024-01-08T15:20:00Z',
     CreatedAt: '2024-01-08T15:20:00Z',
     UpdatedAt: '2024-01-08T15:20:00Z',
   },
@@ -258,6 +266,7 @@ Resources:
     Properties:
       CidrBlock: 10.0.0.0/16
 \`\`\``,
+    PublishedAt: '2024-01-07T12:10:00Z',
     CreatedAt: '2024-01-07T12:10:00Z',
     UpdatedAt: '2024-01-07T12:10:00Z',
   },
@@ -282,6 +291,7 @@ Resources:
 - チーム間の連携
 - バージョン管理
 - 継続的な改善`,
+    PublishedAt: '2024-01-06T09:30:00Z',
     CreatedAt: '2024-01-06T09:30:00Z',
     UpdatedAt: '2024-01-06T09:30:00Z',
   },
@@ -309,6 +319,7 @@ Resources:
 - Estimable（見積もり可能）
 - Small（小さい）
 - Testable（テスト可能）`,
+    PublishedAt: '2024-01-05T14:15:00Z',
     CreatedAt: '2024-01-05T14:15:00Z',
     UpdatedAt: '2024-01-05T14:15:00Z',
   },
@@ -333,6 +344,7 @@ Resources:
 - コミュニケーション能力
 - プロジェクト管理
 - 価格設定・交渉力`,
+    PublishedAt: '2024-01-04T11:45:00Z',
     CreatedAt: '2024-01-04T11:45:00Z',
     UpdatedAt: '2024-01-04T11:45:00Z',
   },
@@ -365,6 +377,7 @@ Resources:
   }
 }
 \`\`\``,
+    PublishedAt: '2024-01-03T16:20:00Z',
     CreatedAt: '2024-01-03T16:20:00Z',
     UpdatedAt: '2024-01-03T16:20:00Z',
   },
@@ -396,6 +409,7 @@ Node.js APIのセキュリティ対策について詳しく解説します。
 const helmet = require('helmet');
 app.use(helmet());
 \`\`\``,
+    PublishedAt: '2024-01-02T13:55:00Z',
     CreatedAt: '2024-01-02T13:55:00Z',
     UpdatedAt: '2024-01-02T13:55:00Z',
   },
@@ -428,6 +442,7 @@ Webパフォーマンス向上のための実践的な手法を紹介します�
 - Lighthouse
 - WebPageTest
 - Chrome DevTools`,
+    PublishedAt: '2024-01-01T10:30:00Z',
     CreatedAt: '2024-01-01T10:30:00Z',
     UpdatedAt: '2024-01-01T10:30:00Z',
   },
@@ -454,6 +469,7 @@ Webパフォーマンス向上のための実践的な手法を紹介します�
 - データ一貫性の管理
 - 監視・ログ戦略
 - デプロイメント戦略`,
+    PublishedAt: '2023-12-31T15:40:00Z',
     CreatedAt: '2023-12-31T15:40:00Z',
     UpdatedAt: '2023-12-31T15:40:00Z',
   },
@@ -486,6 +502,7 @@ Webパフォーマンス向上のための実践的な手法を紹介します�
 - Git + GitHub Actions
 - Docker + Kubernetes
 - Terraform + Ansible`,
+    PublishedAt: '2023-12-30T09:25:00Z',
     CreatedAt: '2023-12-30T09:25:00Z',
     UpdatedAt: '2023-12-30T09:25:00Z',
   },
@@ -523,6 +540,7 @@ export default {
   }
 }
 \`\`\``,
+    PublishedAt: '2023-12-29T14:50:00Z',
     CreatedAt: '2023-12-29T14:50:00Z',
     UpdatedAt: '2023-12-29T14:50:00Z',
   },
@@ -532,8 +550,8 @@ export default {
 export const mockZennArticles: Article[] = [
   {
     ID: 'zenn-1',
-    Title: 'Reactの新機能React Server Componentsを理解する',
-    Image: '⚛️',
+    Title: '⚛Reactの新機能React Server Componentsを理解する',
+    Image: '',
     Category: mockCategories[5],
     Description: 'React Server Componentsの仕組みと従来のクライアントコンポーネントとの違い、実際の使い方について詳しく解説します。',
     Body: `# React Server Componentsを理解する
@@ -561,13 +579,14 @@ async function ArticleList() {
   );
 }
 \`\`\``,
+    PublishedAt: '2024-01-20T09:00:00Z',
     CreatedAt: '2024-01-20T09:00:00Z',
     UpdatedAt: '2024-01-20T09:00:00Z',
   },
   {
     ID: 'zenn-2',
-    Title: 'TypeScript 5.0の新機能まとめ',
-    Image: '🔷',
+    Title: '🔷TypeScript 5.0の新機能まとめ',
+    Image: '',
     Category: mockCategories[5],
     Description: 'TypeScript 5.0で追加された新機能と改善点について、具体的な使用例とともに紹介します。',
     Body: `# TypeScript 5.0の新機能まとめ
@@ -592,13 +611,14 @@ function freeze<const T>(obj: T): T {
 const frozenArray = freeze([1, 2, 3] as const);
 // type: readonly [1, 2, 3]
 \`\`\``,
+    PublishedAt: '2024-01-19T14:30:00Z',
     CreatedAt: '2024-01-19T14:30:00Z',
     UpdatedAt: '2024-01-19T14:30:00Z',
   },
   {
     ID: 'zenn-3',
-    Title: 'Viteで始める高速なフロントエンド開発',
-    Image: '⚡',
+    Title: '⚡Viteで始める高速なフロントエンド開発',
+    Image: '',
     Category: mockCategories[5],
     Description: 'Viteを使った高速な開発環境の構築方法と、Webpackとの違いについて実践的に解説します。',
     Body: `# Viteで始める高速なフロントエンド開発
@@ -634,13 +654,14 @@ export default defineConfig({
   },
 })
 \`\`\``,
+    PublishedAt: '2024-01-18T11:15:00Z',
     CreatedAt: '2024-01-18T11:15:00Z',
     UpdatedAt: '2024-01-18T11:15:00Z',
   },
   {
     ID: 'zenn-4',
-    Title: 'Prismaを使ったタイプセーフなDB操作',
-    Image: '🗄️',
+    Title: '🗄️Prismaを使ったタイプセーフなDB操作',
+    Image: '',
     Category: mockCategories[5],
     Description: 'Prismaを使ったタイプセーフなデータベース操作の実装方法と、パフォーマンス最適化のテクニックを紹介します。',
     Body: `# Prismaを使ったタイプセーフなDB操作
@@ -690,13 +711,14 @@ const user = await prisma.user.create({
   }
 })
 \`\`\``,
+    PublishedAt: '2024-01-17T16:45:00Z',
     CreatedAt: '2024-01-17T16:45:00Z',
     UpdatedAt: '2024-01-17T16:45:00Z',
   },
   {
     ID: 'zenn-5',
-    Title: 'SvelteKitでフルスタックアプリ開発',
-    Image: '🧡',
+    Title: '🧡SvelteKitでフルスタックアプリ開発',
+    Image: '',
     Category: mockCategories[5],
     Description: 'SvelteKitを使ったフルスタックアプリケーションの開発手法と、Next.jsとの違いについて詳しく解説します。',
     Body: `# SvelteKitでフルスタックアプリ開発
@@ -733,13 +755,14 @@ export async function GET() {
   return json(posts);
 }
 \`\`\``,
+    PublishedAt: '2024-01-16T13:20:00Z',
     CreatedAt: '2024-01-16T13:20:00Z',
     UpdatedAt: '2024-01-16T13:20:00Z',
   },
   {
     ID: 'zenn-6',
-    Title: 'TurboとMonorepoでの開発効率化',
-    Image: '🚀',
+    Title: '🚀TurboとMonorepoでの開発効率化',
+    Image: '',
     Category: mockCategories[5],
     Description: 'TurboとNx を使ったMonorepo構成での開発効率化と、大規模プロジェクトでのベストプラクティスを紹介します。',
     Body: `# TurboとMonorepoでの開発効率化
@@ -780,13 +803,14 @@ monorepo/
   }
 }
 \`\`\``,
+    PublishedAt: '2024-01-15T10:55:00Z',
     CreatedAt: '2024-01-15T10:55:00Z',
     UpdatedAt: '2024-01-15T10:55:00Z',
   },
   {
     ID: 'zenn-7',
-    Title: 'WebAssemblyとRustでWebパフォーマンス向上',
-    Image: '🦀',
+    Title: '🦀WebAssemblyとRustでWebパフォーマンス向上',
+    Image: '',
     Category: mockCategories[5],
     Description: 'WebAssemblyとRustを組み合わせて、Webアプリケーションのパフォーマンスを大幅に向上させる方法を実例とともに解説します。',
     Body: `# WebAssemblyとRustでWebパフォーマンス向上
@@ -825,13 +849,14 @@ async function run() {
   console.log(result);
 }
 \`\`\``,
+    PublishedAt: '2024-01-14T08:30:00Z',
     CreatedAt: '2024-01-14T08:30:00Z',
     UpdatedAt: '2024-01-14T08:30:00Z',
   },
   {
     ID: 'zenn-8',
-    Title: 'Deno 2.0の新機能と実践的な使い方',
-    Image: '🦕',
+    Title: '🦕Deno 2.0の新機能と実践的な使い方',
+    Image: '',
     Category: mockCategories[5],
     Description: 'Deno 2.0で追加された新機能の紹介と、Node.jsからの移行時の注意点について実践的に解説します。',
     Body: `# Deno 2.0の新機能と実践的な使い方
@@ -862,6 +887,7 @@ serve(handler, { port: 8000 });
 \`\`\`bash
 deno run --allow-net server.ts
 \`\`\``,
+    PublishedAt: '2024-01-13T15:10:00Z',
     CreatedAt: '2024-01-13T15:10:00Z',
     UpdatedAt: '2024-01-13T15:10:00Z',
   },
@@ -900,7 +926,6 @@ export function getMockArticlesByCategory(categorySlug: string): Article[] {
 }
 
 export function getMockPopularArticles(limit: number = 5): Article[] {
-  // Sort by created date descending and take the most recent ones as "popular"
   return mockArticles
     .sort((a, b) => new Date(b.CreatedAt).getTime() - new Date(a.CreatedAt).getTime())
     .slice(0, limit);
@@ -921,43 +946,8 @@ export function getMockZennArticles(limit: number = 5): Article[] {
   return mockZennArticles.slice(0, limit);
 }
 
-export function generateMockZennArticleListResponse(
-  page: number = 1,
-  limit: number = 10
-): ArticleListResponse {
-  const startIndex = (page - 1) * limit;
-  const endIndex = startIndex + limit;
-  const paginatedArticles = mockZennArticles.slice(startIndex, endIndex);
-
-  return {
-    articles: paginatedArticles,
-    pagination: {
-      total: mockZennArticles.length,
-      page,
-      limit,
-      totalPages: Math.ceil(mockZennArticles.length / limit),
-    },
-  };
-}
-
 export function getMockZennArticleById(id: string): Article | undefined {
   return mockZennArticles.find(article => article.ID === id);
-}
-
-export function getMockZennArticlesByCategory(categorySlug: string): Article[] {
-  return mockZennArticles.filter(article => article.Category.Slug === categorySlug);
-}
-
-export function getMockPopularZennArticles(limit: number = 5): Article[] {
-  return mockZennArticles
-    .sort((a, b) => new Date(b.CreatedAt).getTime() - new Date(a.CreatedAt).getTime())
-    .slice(0, limit);
-}
-
-export function getMockLatestZennArticles(limit: number = 5): Article[] {
-  return mockZennArticles
-    .sort((a, b) => new Date(b.CreatedAt).getTime() - new Date(a.CreatedAt).getTime())
-    .slice(0, limit);
 }
 
 // Simulate API delay for more realistic behavior

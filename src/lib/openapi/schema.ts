@@ -198,6 +198,12 @@ export interface components {
             Body: string;
             /**
              * Format: date-time
+             * @description 公開日時
+             * @example 2023-01-01T00:00:00Z
+             */
+            PublishedAt: string;
+            /**
+             * Format: date-time
              * @description 作成日時
              * @example 2023-01-01T00:00:00Z
              */
