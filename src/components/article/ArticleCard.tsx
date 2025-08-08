@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import type { ArticleCardProps } from "@/lib/types";
-import { formatDate, truncateText, buildArticleUrl, isEmoji, extractEmoji } from "@/lib/utils";
+import { formatDate, truncateText, buildArticleUrl } from "@/lib/utils";
 import {
   ARTICLE_DESCRIPTION_MAX_LENGTH,
   ARTICLE_IMAGE_PLACEHOLDER,
@@ -14,8 +14,7 @@ export default function ArticleCard({
   variant = "default",
 }: ArticleCardProps) {
   const isCompact = variant === "compact";
-  const isZennArticle = isEmoji(article.Image);
-  const emoji = isZennArticle ? extractEmoji(article.Image) : '';
+  const isZennArticle = article.Category.Slug === 'zenn';
 
   return (
     <article
@@ -25,12 +24,12 @@ export default function ArticleCard({
       )}
     >
       {/* 記事全体のリンク */}
-      <Link 
-        href={buildArticleUrl(article.ID, article.Image)}
+      <Link
+        href={buildArticleUrl(article.ID, article.Category.Slug)}
         className="absolute inset-0 z-10"
         aria-label={`記事「${article.Title}」を読む`}
-        target={isZennArticle ? "_blank" : undefined}
-        rel={isZennArticle ? "noopener noreferrer" : undefined}
+        target={article.Category.Slug === 'zenn' ? "_blank" : undefined}
+        rel={article.Category.Slug === 'zenn' ? "noopener noreferrer" : undefined}
       >
         <span className="sr-only">記事「{article.Title}」を読む</span>
       </Link>
@@ -73,16 +72,10 @@ export default function ArticleCard({
         <h2
           className={cn(
             "font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2",
-            isCompact ? "text-sm mb-1" : "text-lg mb-2",
-            isZennArticle ? "flex items-center gap-2" : ""
+            isCompact ? "text-sm mb-1" : "text-lg mb-2"
           )}
         >
-          {isZennArticle && emoji && (
-            <span className="text-xl flex-shrink-0" aria-hidden="true">
-              {emoji}
-            </span>
-          )}
-          <span className="flex-1">{article.Title}</span>
+          {article.Title}
         </h2>
 
         {!isCompact && !isZennArticle && (

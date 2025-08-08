@@ -93,9 +93,9 @@ export function slugify(text: string): string {
 }
 
 // URL utilities
-export function buildArticleUrl(id: string, imageField?: string): string {
-  // Zenn記事の場合は外部URLに遷移
-  if (imageField && isEmoji(imageField)) {
+export function buildArticleUrl(id: string, categorySlug: string): string {
+  // Zenn記事の場合は外部URLに遷移（Category.Slugで判定）
+  if (categorySlug === 'zenn') {
     return `https://zenn.dev/kozennoki/articles/${id}`;
   }
   return `/articles/${id}`;
