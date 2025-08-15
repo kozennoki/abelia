@@ -34,7 +34,7 @@ export const ARTICLES_LIST_DESCRIPTION = `${SITE_NAME}${BLOG_DESCRIPTION_SUFFIX}
 
 // Error messages
 export const ERROR_ARTICLE_NOT_FOUND = 'The requested article could not be found.';
-export const ERROR_CATEGORY_NOT_FOUND = '指定されたカテゴリは存在しません。';
+export const ERROR_CATEGORY_NOT_FOUND = 'The specified category does not exist.';
 
 // Cache
 export const CACHE_REVALIDATE_SECONDS = 3600; // 1 hour

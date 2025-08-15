@@ -6,7 +6,8 @@ import type { Article, Category } from "@/lib/types";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { capitalizeFirst } from "@/lib/utils";
-import { SITE_NAME, SITE_URL, CATEGORY_DESCRIPTION_TEMPLATE, ERROR_CATEGORY_NOT_FOUND } from "@/lib/constants";
+import { SITE_NAME, CATEGORY_DESCRIPTION_TEMPLATE, ERROR_CATEGORY_NOT_FOUND } from "@/lib/constants";
+import { generateCategoryMetadata, generateErrorMetadata } from "@/lib/seo";
 
 // 静的エクスポート用設定
 export const dynamic = "force-static";
@@ -47,40 +48,19 @@ export async function generateMetadata({
     const category = categories.find((c) => c.Slug === slug);
 
     if (!category) {
-      return {
-        title: `カテゴリが見つかりません`,
-        description: ERROR_CATEGORY_NOT_FOUND,
-      };
+      return generateErrorMetadata(
+        "Category Not Found",
+        ERROR_CATEGORY_NOT_FOUND
+      );
     }
 
-    const title = `${category.Name}の記事一覧`;
-    const description = CATEGORY_DESCRIPTION_TEMPLATE(category.Name);
-
-    return {
-      title,
-      description,
-      openGraph: {
-        title,
-        description,
-        type: "website",
-        url: `${SITE_URL}/categories/${slug}`,
-        siteName: SITE_NAME,
-      },
-      twitter: {
-        card: "summary_large_image",
-        title,
-        description,
-      },
-      alternates: {
-        canonical: `${SITE_URL}/categories/${slug}`,
-      },
-    };
+    return generateCategoryMetadata(category, CATEGORY_DESCRIPTION_TEMPLATE);
   } catch (error) {
     console.error("Error generating metadata for category:", error);
-    return {
-      title: `カテゴリ | ${SITE_NAME}`,
-      description: "カテゴリページです。",
-    };
+    return generateErrorMetadata(
+      `カテゴリ | ${SITE_NAME}`,
+      "カテゴリページです。"
+    );
   }
 }
 
