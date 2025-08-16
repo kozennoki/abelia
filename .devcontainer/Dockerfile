@@ -10,5 +10,9 @@ RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/loc
 # serveをグローバルにインストール（静的サイト配信用）
 RUN npm install -g serve
 
+# uvをインストール（Python package manager）
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV PATH="/root/.cargo/bin:$PATH"
+
 # 作業ディレクトリを設定
 WORKDIR /workspace
