@@ -3,7 +3,7 @@ import { Noto_Sans_JP, Josefin_Sans } from "next/font/google";
 import "./globals.css";
 import { Header, Footer } from "@/components/layout";
 import { GoogleAnalytics } from "@/components/analytics";
-import { WebsiteSchema } from "@/components/common";
+import { WebsiteSchema, CookieConsent } from "@/components/common";
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL, AUTHOR_NAME } from "@/lib/constants";
 import { env } from "@/lib/env";
 
@@ -83,6 +83,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   );
