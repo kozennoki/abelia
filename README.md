@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Abelia
+
+Abelia は [Nerine](https://github.com/kozennoki/nerine) BFF API と連携するブログフロントエンドアプリケーションです。Next.js 14 の App Router と静的サイト生成を使用して構築されています。
+
+## 特徴
+
+- **静的サイト生成**: 高速なページロードと SEO 最適化
+- **レスポンシブデザイン**: モバイルファーストなデザインアプローチ
+- **ダークモード対応**: システム設定に基づく自動切り替え
+- **シンタックスハイライト**: コードブロックの美しい表示
+- **構造化データ**: リッチスニペット対応
+- **PWA 対応**: オフライン機能とアプリライクな体験
+
+## ️ 技術スタック
+
+- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Deployment**: AWS (S3 + CloudFront)
+- **API**: [Nerine BFF](https://github.com/kozennoki/nerine) (Go-based)
+- **CMS**: [microCMS](https://microcms.io/)
 
 ## Getting Started
 
-First, run the development server:
+### 前提条件
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Node.js 22 以上
+- npm または yarn
+- Nerine API が稼働していること
+
+### セットアップ
+
+1. **リポジトリのクローン**
+
+   ```bash
+   git clone https://github.com/kozennoki/abelia.git
+   cd abelia
+   ```
+
+2. **依存関係のインストール**
+
+   ```bash
+   npm install
+   ```
+
+3. **環境変数の設定**
+
+   ```bash
+   cp .env.local.example .env.local
+   ```
+
+   `.env.local` を編集:
+
+   ```bash
+   NEXT_PUBLIC_API_URL=http://localhost:8080
+   NEXT_PUBLIC_API_KEY=your-nerine-api-key
+   NEXT_PUBLIC_GA_ID=GA-XXXXXXXXX
+   NEXT_PUBLIC_GSC_VERIFICATION_CODE=XXXXXXXXX
+   ```
+
+4. **OpenAPI 型定義の生成**
+
+   ```bash
+   npm run generate:types
+   ```
+
+5. **開発サーバーの起動**
+
+   ```bash
+   npm run dev
+   ```
+
+   [http://localhost:3000](http://localhost:3000) でアプリケーションにアクセスできます。
+
+## プロジェクト構造
+
+```
+src/
+├── app/                 # Next.js App Router
+├── components/          # Reactコンポーネント
+│   ├── article/        # 記事関連
+│   ├── layout/         # レイアウト
+│   ├── common/         # 共通コンポーネント
+│   └── analytics/      # アナリティクス
+├── lib/                # ユーティリティ関数
+│   ├── api.ts          # API クライアント
+│   ├── types.ts        # 型定義
+│   └── openapi/        # 生成された型
+└── types/              # 追加の型定義
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## コマンド
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| コマンド                 | 説明                         |
+| ------------------------ | ---------------------------- |
+| `npm run dev`            | 開発サーバーを起動           |
+| `npm run build`          | 本番用ビルド                 |
+| `npm run build:ci`       | CI 用ビルド                  |
+| `npm run start`          | 本番サーバーを起動           |
+| `npm run lint`           | ESLint を実行                |
+| `npm run generate:types` | OpenAPI スキーマから型を生成 |
+| `npm run clean`          | ビルド成果物をクリーンアップ |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## デプロイ
 
-## Learn More
+### 自動デプロイ
 
-To learn more about Next.js, take a look at the following resources:
+本番環境へのデプロイは GitHub Actions で自動化されています：
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **手動デプロイ**: GitHub の Actions タブから `Deploy to Production` ワークフローを実行
+- **自動デプロイ**: microCMS の webhook により自動実行
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 手動デプロイ
 
-## Deploy on Vercel
+```bash
+# ビルド
+npm run build
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# S3にアップロード (AWS CLI設定済みの場合)
+aws s3 sync out/ s3://your-bucket-name/ --delete
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## カラーパレット
+
+- **Primary**: #1e646e
+- **Secondary**: #7ab6a9
+- **BaseColor**: #FFFFFF
+
+## 🔗 関連リポジトリ
+
+- [Nerine (BFF API)](https://github.com/kozennoki/nerine) - Go ベースの BFF API
+- [OpenAPI Schema](https://github.com/kozennoki/api-schema) - API スキーマ定義
