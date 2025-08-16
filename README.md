@@ -126,7 +126,7 @@ aws s3 sync out/ s3://your-bucket-name/ --delete
 - **Secondary**: #7ab6a9
 - **BaseColor**: #FFFFFF
 
-## 🔗 関連リポジトリ
+## 関連リポジトリ
 
 - [Nerine (BFF API)](https://github.com/kozennoki/nerine) - Go ベースの BFF API
 - [OpenAPI Schema](https://github.com/kozennoki/api-schema) - API スキーマ定義
