@@ -2,7 +2,7 @@ import { Button } from "@/components/ui";
 
 export default function NotFoundPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-muted-background">
+    <div className="fixed inset-0 flex items-center justify-center bg-muted-background">
       <div className="max-w-md w-full bg-background rounded-lg shadow-md p-8 text-center">
         <div className="mb-6">
           <svg
