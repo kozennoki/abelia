@@ -48,7 +48,7 @@ export default async function HomePage() {
       {/* パララックスヒーローセクション */}
       <ParallaxHero backgroundImage="/top.jpg" logoImage="/top_logo.jpg" />
 
-      <div className="container mx-auto px-4 py-16" data-section="latest">
+      <div className="container mx-auto px-4 py-16" data-section="top">
         {/* ブログ説明セクション */}
         <div className="mb-2 flex flex-row items-center">
           <h2 className="text-3xl font-bold text-foreground mr-4">About</h2>

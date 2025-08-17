@@ -44,13 +44,13 @@ export function ParallaxHero({
   }, [])
 
   // スクロールインジケーターのクリックハンドラー
-  const scrollToLatest = useCallback(() => {
-    const latestSection = document.querySelector('[data-section="latest"]') as HTMLElement
+  const scroll = useCallback(() => {
+    const topSection = document.querySelector('[data-section="top"]') as HTMLElement
     const header = document.querySelector('header') as HTMLElement
 
-    if (latestSection) {
+    if (topSection) {
       const headerHeight = header ? header.offsetHeight : 80 // ヘッダーの高さを取得、フォールバック80px
-      const targetPosition = latestSection.offsetTop - headerHeight
+      const targetPosition = topSection.offsetTop - headerHeight
 
       window.scrollTo({
         top: targetPosition,
@@ -175,7 +175,7 @@ export function ParallaxHero({
         className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-1000 delay-1000 cursor-pointer ${
           isLoaded ? 'opacity-70 translate-y-0' : 'opacity-0 translate-y-4'
         }`}
-        onClick={scrollToLatest}
+        onClick={scroll}
       >
         <div className="flex flex-col items-center text-white group">
           <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center group-hover:border-white/80 transition-colors duration-300 animate-bounce group-hover:[animation-play-state:paused]">
