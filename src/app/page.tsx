@@ -1,7 +1,7 @@
 import { getArticles, getZennArticles } from "@/lib/api";
 import { ArticleList } from "@/components/article";
 import { Button } from "@/components/ui";
-import { ParallaxHero } from "@/components/common";
+import { ParallaxHero, AboutSection } from "@/components/common";
 import { HOME_ARTICLES_LIMIT, ZENN_ARTICLES_LIMIT } from "@/lib/constants";
 import type { Article } from "@/lib/types";
 
@@ -50,6 +50,9 @@ export default async function HomePage() {
         backgroundImage="/top.jpg"
         logoImage="/top_logo.jpg"
       />
+
+      {/* ブログ説明セクション */}
+      <AboutSection />
 
       <div className="container mx-auto px-4 py-16" data-section="latest">
         {/* 最新記事セクション */}
