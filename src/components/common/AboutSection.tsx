@@ -1,14 +1,6 @@
 export function AboutSection() {
   return (
-    <div className="container mx-auto px-4 py-16 border-b border-border">
-      {/* Aboutセクション */}
-      <div className="mb-2 flex flex-row items-center">
-        <h2 className="text-3xl font-bold text-foreground mr-4">About</h2>
-        <div className="font-light">- 浩然之気について -</div>
-      </div>
-
-      <div className="border border-secondary mb-8"></div>
-
+    <div className="container mx-auto px-4 py-16">
       <div className="max-w-6xl mx-auto">
         <div className="space-y-12 my-20">
           <div className="space-y-6">

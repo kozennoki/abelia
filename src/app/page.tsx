@@ -46,17 +46,19 @@ export default async function HomePage() {
   return (
     <div className="-mt-16 md:-mt-20">
       {/* パララックスヒーローセクション */}
-      <ParallaxHero
-        backgroundImage="/top.jpg"
-        logoImage="/top_logo.jpg"
-      />
-
-      {/* ブログ説明セクション */}
-      <AboutSection />
+      <ParallaxHero backgroundImage="/top.jpg" logoImage="/top_logo.jpg" />
 
       <div className="container mx-auto px-4 py-16" data-section="latest">
-        {/* 最新記事セクション */}
+        {/* ブログ説明セクション */}
         <div className="mb-2 flex flex-row items-center">
+          <h2 className="text-3xl font-bold text-foreground mr-4">About</h2>
+          <div className="font-light">- 浩然之気について -</div>
+        </div>
+        <div className="border border-secondary mb-8"></div>
+        <AboutSection />
+
+        {/* 最新記事セクション */}
+        <div className="mb-2 flex flex-row items-center border-t border-border pt-16">
           <h2 className="text-3xl font-bold text-foreground mr-4">Recent</h2>
           <div className="font-light">- 最新記事 -</div>
         </div>
