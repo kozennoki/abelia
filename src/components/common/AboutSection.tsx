@@ -39,11 +39,11 @@ export function AboutSection() {
                   <span className="font-bold">
                     「道徳的に正しく、おおらかで、自分らしく生きる」
                   </span>
-                  ということが "浩然之気を養う" ことだと解釈しています。
+                  ということが &ldquo;浩然之気を養う&rdquo; ことだと解釈しています。
                 </p>
                 <p>
                   私はこの言葉が好きで、このような人間でありたいと思い、
-                  <span className="font-bold"> "然" -zen- </span>
+                  <span className="font-bold"> &ldquo;然&rdquo; -zen- </span>
                   という名前で活動しています。
                 </p>
                 <p>
