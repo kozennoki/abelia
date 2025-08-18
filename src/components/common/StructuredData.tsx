@@ -61,7 +61,7 @@ export function ArticleSchema({ article }: ArticleSchemaProps) {
       "@id": `${SITE_URL}/articles/${article.ID}`,
     },
     url: `${SITE_URL}/articles/${article.ID}`,
-    articleSection: article.Category.Name,
+    articleSection: article.Category.Slug,
   };
 
   return (

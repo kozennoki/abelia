@@ -7,7 +7,7 @@ import {
   ARTICLE_DESCRIPTION_MAX_LENGTH,
   ARTICLE_IMAGE_PLACEHOLDER,
 } from "@/lib/constants";
-import { cn } from "@/lib/utils";
+import { cn, capitalizeFirst } from "@/lib/utils";
 
 export default function ArticleCard({
   article,
@@ -62,7 +62,7 @@ export default function ArticleCard({
             className="inline-block px-2 py-1 text-xs font-medium text-primary bg-secondary/20 rounded hover:bg-secondary/30 transition-colors relative z-20"
             onClick={(e) => e.stopPropagation()}
           >
-            {article.Category.Name}
+            {capitalizeFirst(article.Category.Slug)}
           </Link>
           <time className="text-xs text-muted">
             {formatDate(article.PublishedAt)}

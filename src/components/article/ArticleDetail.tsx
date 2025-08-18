@@ -7,7 +7,7 @@ import rehypeRaw from "rehype-raw";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import type { ArticleDetailProps } from "@/lib/types";
-import { formatDate } from "@/lib/utils";
+import { formatDate, capitalizeFirst } from "@/lib/utils";
 import { CodeBlock } from "./CodeBlock";
 
 export default function ArticleDetail({ article }: ArticleDetailProps) {
@@ -20,7 +20,7 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
             href={`/categories/${article.Category.Slug}`}
             className="inline-block px-3 py-1 text-sm font-medium text-primary bg-secondary/20 rounded hover:bg-secondary/30 transition-colors"
           >
-            {article.Category.Name}
+            {capitalizeFirst(article.Category.Slug)}
           </Link>
         </div>
 
@@ -93,7 +93,7 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
               href={`/categories/${article.Category.Slug}`}
               className="text-sm font-medium text-primary hover:text-accent transition-colors"
             >
-              {article.Category.Name}
+              {capitalizeFirst(article.Category.Slug)}
             </Link>
           </div>
 
