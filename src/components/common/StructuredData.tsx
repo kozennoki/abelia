@@ -54,7 +54,7 @@ export function ArticleSchema({ article }: ArticleSchemaProps) {
       "@type": "Person",
       name: AUTHOR_NAME,
     },
-    datePublished: article.CreatedAt,
+    datePublished: article.PublishedAt,
     dateModified: article.UpdatedAt,
     mainEntityOfPage: {
       "@type": "WebPage",

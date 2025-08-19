@@ -107,7 +107,7 @@ export function generateArticleMetadata(article: Article): Metadata {
     description: article.Description,
     url: `/articles/${article.ID}`,
     type: "article",
-    publishedTime: article.CreatedAt,
+    publishedTime: article.PublishedAt,
     modifiedTime: article.UpdatedAt,
     section: article.Category.Name,
     keywords: [article.Category.Name, "ブログ", "技術記事"],

@@ -29,10 +29,10 @@ export default function ArticleDetail({ article }: ArticleDetailProps) {
         </h1>
 
         <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
-          <time dateTime={article.CreatedAt}>
-            {formatDate(article.CreatedAt)}
+          <time dateTime={article.PublishedAt}>
+            {formatDate(article.PublishedAt)}
           </time>
-          {article.UpdatedAt !== article.CreatedAt && (
+          {article.UpdatedAt !== article.PublishedAt && (
             <span>
               更新: {formatDate(article.UpdatedAt)}
             </span>
