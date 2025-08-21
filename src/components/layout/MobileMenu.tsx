@@ -82,7 +82,7 @@ export function MobileMenu({ categories }: MobileMenuProps) {
           {/* Mobile category menu */}
           <div className="px-3 py-2">
             <div 
-              className="font-medium text-gray-600 mb-2"
+              className="font-medium text-muted-foreground mb-2"
               style={{
                 animation: isMobileMenuOpen
                   ? 'slideInFromLeft 0.3s ease-out forwards'
