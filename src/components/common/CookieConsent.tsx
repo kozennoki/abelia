@@ -40,11 +40,11 @@ export function CookieConsent() {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t border-border shadow-lg">
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-background  dark:bg-black border-border shadow-lg">
       <div className="container mx-auto px-4 py-4">
         <div className="flex flex-col md:flex-row md:items-center gap-4">
           <div className="flex-1">
-            <h3 className="font-semibold text-foreground mb-2">
+            <h3 className="font-semibold text-foreground dark:text-white mb-2">
               Cookieの使用について
             </h3>
             <p className="text-sm text-muted-foreground">
@@ -61,7 +61,7 @@ export function CookieConsent() {
             </button>
             <button
               onClick={handleReject}
-              className="bg-background hover:bg-muted-background text-primary border border-primary py-3 px-6 rounded-md duration-300"
+              className="bg-background dark:bg-black hover:bg-muted-background dark:hover:bg-black text-primary border border-primary py-3 px-6 rounded-md duration-300"
             >
               拒否
             </button>
