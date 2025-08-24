@@ -24,7 +24,7 @@ export default async function Header({
   }
 
   return (
-    <header className="border-b border-border dark:border-black bg-background dark:bg-black fixed top-0 left-0 right-0 z-50">
+    <header className="border-b border-border bg-background fixed top-0 left-0 right-0 z-50">
       <div className="md:px-16 px-6">
         <nav className="flex items-center justify-between">
           {/* モバイル用: 左側の空スペース */}
@@ -71,7 +71,7 @@ export default async function Header({
               <span className="absolute -bottom-0.5 left-1/2 w-0 h-1 bg-foreground transition-all duration-300 origin-center -translate-x-1/2 group-hover:w-full transform"></span>
 
               {/* ドロップダウンメニュー */}
-              <div className="absolute left-0 w-48 bg-background dark:bg-black rounded-md shadow-lg border border-border dark:border-black opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 z-50">
+              <div className="absolute left-0 w-48 bg-background rounded-md shadow-lg border border-border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 z-50">
                 {categories.map((category) => (
                   <Link
                     key={category.Slug}

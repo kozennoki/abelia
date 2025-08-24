@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: 'media',
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,24 +10,34 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // ブランドカラー
-        primary: "#1e646e",
+        // CSS変数ベースのカラー
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        primary: "var(--primary)",
+        "muted-bg": "var(--muted-bg)",
+        "muted-text": "var(--muted-text)",
+        "border-color": "var(--border-color)",
+        "border-accent": "var(--border-accent)",
+        "code-bg": "var(--code-bg)",
+        "code-text": "var(--code-text)",
+        "inline-code-bg": "var(--inline-code-bg)",
+        "inline-code-text": "var(--inline-code-text)",
+
+        // 既存のブランドカラー
         secondary: "#7ab6a9",
-        accent: "#0f4c54", // primary/90相当
-        
+        accent: "#0f4c54",
+
         // セマンティックカラー
         success: "#10b981",
         warning: "#f59e0b",
         error: "#ef4444",
         info: "#3b82f6",
-        
-        // ニュートラルカラー（Gray系統一）
-        foreground: "#111827",        // gray-900相当
-        "muted-foreground": "#4b5563", // gray-600相当  
-        muted: "#6b7280",             // gray-500相当
-        border: "#e5e7eb",            // gray-200相当
-        background: "#ffffff",
-        "muted-background": "#f9fafb", // gray-50相当
+
+        // Tailwind互換エイリアス
+        border: "var(--border-color)",
+        muted: "var(--muted-text)",
+        "muted-foreground": "var(--muted-text)",
+        "muted-background": "var(--muted-bg)",
       },
       fontFamily: {
         'noto-sans-jp': ['var(--font-noto-sans-jp)', 'sans-serif'],

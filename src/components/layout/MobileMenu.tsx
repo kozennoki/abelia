@@ -44,7 +44,7 @@ export function MobileMenu({ categories }: MobileMenuProps) {
 
       {/* Mobile menu panel */}
       <div
-        className={`absolute top-full left-0 right-0 md:hidden border-t border-border dark:border-black  bg-background dark:bg-black shadow-lg z-50 overflow-hidden transition-all duration-300 ease-in-out ${
+        className={`absolute top-full left-0 right-0 md:hidden border-t border-border bg-background shadow-lg z-50 overflow-hidden transition-all duration-300 ease-in-out ${
           isMobileMenuOpen
             ? 'max-h-96 opacity-100 translate-y-0'
             : 'max-h-0 opacity-0 -translate-y-2'
