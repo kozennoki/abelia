@@ -10,13 +10,15 @@ import { env } from "@/lib/env";
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
   variable: "--font-noto-sans-jp",
-  weight: ["300", "400", "500", "700"],
+  weight: ["400", "700"],
+  display: "swap",
 });
 
 const josefinSans = Josefin_Sans({
   subsets: ["latin"],
   variable: "--font-josefin-sans",
-  weight: ["300", "400", "500", "700"],
+  weight: ["400", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -73,6 +75,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
+      <head>
+        {/* フォント最適化 - DNS prefetch */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body
         className={`${notoSansJP.variable} ${josefinSans.variable} antialiased min-h-screen flex flex-col`}
       >

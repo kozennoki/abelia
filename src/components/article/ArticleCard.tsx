@@ -8,6 +8,7 @@ import {
   ARTICLE_IMAGE_PLACEHOLDER,
 } from "@/lib/constants";
 import { cn, capitalizeFirst } from "@/lib/utils";
+import { OptimizedImage } from "@/components/common";
 
 export default function ArticleCard({
   article,
@@ -42,13 +43,13 @@ export default function ArticleCard({
             isCompact ? "w-32 h-18 flex-shrink-0" : "w-full aspect-video"
           )}
         >
-          <img
+          <OptimizedImage
             src={article.Image || ARTICLE_IMAGE_PLACEHOLDER}
             alt={article.Title}
             className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.src = ARTICLE_IMAGE_PLACEHOLDER;
+            sizes={isCompact ? "128px" : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"}
+            onError={() => {
+              // フォールバック処理はOptimizedImageコンポーネント内で処理
             }}
           />
         </div>
