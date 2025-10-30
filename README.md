@@ -2,6 +2,8 @@
 
 Abelia は [Nerine](https://github.com/kozennoki/nerine) BFF API と連携するブログのフロントエンドアプリケーションです。Next.js 14 の App Router と静的サイト生成（SSG）を使用して構築されています。
 
+Webサイト: https://kozennoki.com
+
 ![image](https://github.com/user-attachments/assets/13ddcd59-7414-4d94-a4ab-385f0b55f584)
 
 ## 概要
