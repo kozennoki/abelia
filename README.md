@@ -1,83 +1,53 @@
 # Abelia
 
-Abelia は [Nerine](https://github.com/kozennoki/nerine) BFF API と連携するブログフロントエンドアプリケーションです。Next.js 14 の App Router と静的サイト生成を使用して構築されています。
+Abelia は [Nerine](https://github.com/kozennoki/nerine) BFF API と連携するブログのフロントエンドアプリケーションです。Next.js 14 の App Router と静的サイト生成（SSG）を使用して構築されています。
 
-## 特徴
+![image](https://github.com/user-attachments/assets/13ddcd59-7414-4d94-a4ab-385f0b55f584)
 
-- **静的サイト生成**: 高速なページロードと SEO 最適化
-- **レスポンシブデザイン**: モバイルファーストなデザインアプローチ
-- **ダークモード対応**: システム設定に基づく自動切り替え
-- **シンタックスハイライト**: コードブロックの美しい表示
-- **構造化データ**: リッチスニペット対応
-- **PWA 対応**: オフライン機能とアプリライクな体験
+## 概要
 
-## ️ 技術スタック
+このプロジェクトは、microCMSをコンテンツソースとし、GoベースのBFF(Backend for Frontend)APIとフロントエンドを分離した、ブログシステムのフロントエンド部分です。静的サイト生成により、高速なページロード、優れたSEO、低コストなホスティングを実現しています。
 
-- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+**特徴:**
+- **静的サイト生成**: ビルド時に全ページを事前生成し、CDNから配信
+- **OpenAPI スキーマ駆動**: バックエンドとの型安全な連携
+- **自動デプロイ**: microCMSの更新をWebhookで検知し自動デプロイ
+
+## 主要機能
+
+- **記事管理**
+  - 記事一覧・詳細表示
+  - Zenn記事連携
+  - カテゴリ別記事表示
+  - ページネーション対応
+
+- **UX/UI**
+  - レスポンシブデザイン
+  - ダークモード自動切り替え
+  - モバイルメニュー対応
+
+## アーキテクチャ
+![Image](https://github.com/user-attachments/assets/9b78f0bb-6e3c-45ee-8cab-9ac028a6345a)
+
+**設計思想:**
+- **マイクロサービス**: Nerine BFFを介してコンテンツを取得
+- **SSG**: ビルド時に全ページを生成し、CDNから配信
+- **スキーマ駆動開発**: OpenAPIスキーマからTypeScript型を自動生成し、型安全性を確保
+
+## 技術スタック
+
+- **Framework**: Next.js 14
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
 - **Deployment**: AWS (S3 + CloudFront)
-- **API**: [Nerine BFF](https://github.com/kozennoki/nerine) (Go-based)
-- **CMS**: [microCMS](https://microcms.io/)
-
-## Getting Started
-
-### 前提条件
-
-- Node.js 22 以上
-- npm または yarn
-- Nerine API が稼働していること
-
-### セットアップ
-
-1. **リポジトリのクローン**
-
-   ```bash
-   git clone https://github.com/kozennoki/abelia.git
-   cd abelia
-   ```
-
-2. **依存関係のインストール**
-
-   ```bash
-   npm install
-   ```
-
-3. **環境変数の設定**
-
-   ```bash
-   cp .env.local.example .env.local
-   ```
-
-   `.env.local` を編集:
-
-   ```bash
-   NEXT_PUBLIC_API_URL=http://localhost:8080
-   NEXT_PUBLIC_API_KEY=your-nerine-api-key
-   NEXT_PUBLIC_GA_ID=GA-XXXXXXXXX
-   NEXT_PUBLIC_GSC_VERIFICATION_CODE=XXXXXXXXX
-   ```
-
-4. **OpenAPI 型定義の生成**
-
-   ```bash
-   npm run generate:types
-   ```
-
-5. **開発サーバーの起動**
-
-   ```bash
-   npm run dev
-   ```
-
-   [http://localhost:3000](http://localhost:3000) でアプリケーションにアクセスできます。
+- **API**: [Nerine](https://github.com/kozennoki/nerine)
 
 ## プロジェクト構造
 
 ```
 src/
-├── app/                 # Next.js App Router
-├── components/          # Reactコンポーネント
+├── app/                # Next.js App Router
+├── components/         # Reactコンポーネント
 │   ├── article/        # 記事関連
 │   ├── layout/         # レイアウト
 │   ├── common/         # 共通コンポーネント
@@ -89,37 +59,6 @@ src/
 └── types/              # 追加の型定義
 ```
 
-## コマンド
-
-| コマンド                 | 説明                         |
-| ------------------------ | ---------------------------- |
-| `npm run dev`            | 開発サーバーを起動           |
-| `npm run build`          | 本番用ビルド                 |
-| `npm run build:ci`       | CI 用ビルド                  |
-| `npm run start`          | 本番サーバーを起動           |
-| `npm run lint`           | ESLint を実行                |
-| `npm run generate:types` | OpenAPI スキーマから型を生成 |
-| `npm run clean`          | ビルド成果物をクリーンアップ |
-
-## デプロイ
-
-### 自動デプロイ
-
-本番環境へのデプロイは GitHub Actions で自動化されています：
-
-- **手動デプロイ**: GitHub の Actions タブから `Deploy to Production` ワークフローを実行
-- **自動デプロイ**: microCMS の webhook により自動実行
-
-### 手動デプロイ
-
-```bash
-# ビルド
-npm run build
-
-# S3にアップロード (AWS CLI設定済みの場合)
-aws s3 sync out/ s3://your-bucket-name/ --delete
-```
-
 ## カラーパレット
 
 - **Primary**: #1e646e
@@ -128,5 +67,5 @@ aws s3 sync out/ s3://your-bucket-name/ --delete
 
 ## 関連リポジトリ
 
-- [Nerine (BFF API)](https://github.com/kozennoki/nerine) - Go ベースの BFF API
-- [OpenAPI Schema](https://github.com/kozennoki/api-schema) - API スキーマ定義
+- [Nerine](https://github.com/kozennoki/nerine) - Go ベースの BFF API
+- [Hibiscus](https://github.com/kozennoki/api-schema) - OpenAPI スキーマ定義
