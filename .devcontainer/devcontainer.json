@@ -1,8 +1,6 @@
 {
   "name": "abelia",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -29,5 +27,5 @@
     "--name=abelia",
     "--network=dev-kozennoki"
   ],
-  "postCreateCommand": "echo 'Dev Container Ready! Hello, Abelia!!'"
+  "postCreateCommand": "bash setup.sh"
 }

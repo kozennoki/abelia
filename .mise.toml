@@ -1,0 +1,4 @@
+[tools]
+node = "22"
+uv = "latest"
+codex = "0.60.1"
