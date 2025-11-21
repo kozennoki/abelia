@@ -79,6 +79,7 @@ export default function RootLayout({
         {/* フォント最適化 - DNS prefetch */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <meta name="google-adsense-account" content="ca-pub-8822226671476458"></meta>
       </head>
       <body
         className={`${notoSansJP.variable} ${josefinSans.variable} antialiased min-h-screen flex flex-col`}
